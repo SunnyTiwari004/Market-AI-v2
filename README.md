@@ -1,34 +1,41 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Market AI
 
-## Getting Started
+Beginner-first, evidence-backed financial research experience.
 
-First, run the development server:
+Market AI is a research and decision-support product, not a brokerage or trade-execution platform. Current financial content will use centralized demo/mock data. There are no real financial APIs or AI integrations yet.
+
+Current project status: **Frontend architecture / prototype implementation phase.** The repository contains the foundation and approved documentation; product screens have not yet been implemented.
+
+Technology baseline: Next.js App Router, TypeScript, React, Tailwind CSS, and pnpm. [package.json](package.json) and [pnpm-lock.yaml](pnpm-lock.yaml) own dependency versions.
+
+## Getting started
+
+Use the pnpm version declared in `package.json`. Install the locked dependencies and start the development server:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+pnpm install --frozen-lockfile
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Run `pnpm lint` to lint the project and `pnpm build` to create a production build. After a successful build, use `pnpm start` to start the production server.
 
-## Learn More
+## Documentation
 
-To learn more about Next.js, take a look at the following resources:
+- [Repository instructions](AGENTS.md)
+- [Product principles](docs/product/PRODUCT_PRINCIPLES.md)
+- [Experience contracts](docs/product/EXPERIENCE_CONTRACTS.md)
+- [Terminology](docs/product/TERMINOLOGY.md)
+- [Design system](docs/design/DESIGN_SYSTEM.md)
+- [Responsive rules](docs/design/RESPONSIVE_RULES.md)
+- [Frontend architecture](docs/architecture/FRONTEND_ARCHITECTURE.md)
+- [Mock data contract](docs/data/MOCK_DATA_CONTRACT.md)
+- [Frontend acceptance](docs/qa/FRONTEND_ACCEPTANCE.md)
+- [Architecture decision records](docs/architecture/adr/)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Development rules
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Follow AGENTS.md and the approved architecture and product contracts. They take precedence over Stitch-generated markup; historical design files do not override them. Keep shared research logic and data consistent across responsive presentations.
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Do not invent financial values, source records, research scores, or probabilities. Use approved centralized typed mock fixtures, preserve their provenance, and show missing information as unavailable. Respect the authorized phase: application code, integrations, dependencies, staging, commits, and deployment require the relevant task authorization.

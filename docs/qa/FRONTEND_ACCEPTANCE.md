@@ -19,13 +19,14 @@ Record the actual route, viewport, state, check method, and result for implement
 
 ## Cross-screen financial consistency
 
-- [ ] Home, Explore, Stock, Decision, and current-state Ask AI agree with every approved Tata field in [MOCK_DATA_CONTRACT.md](../data/MOCK_DATA_CONTRACT.md#canonical-tata-motors-current-demo-fixture).
-- [ ] The approved price and daily percentage appear without an absolute rupee daily change or inferred previous close.
-- [ ] All current What Changed views resolve the same approved 30-day previous/current snapshot pair. No conflicting score baseline or extra historical metric is invented.
-- [ ] Daily weakness, longer-term business health, absolute valuation, and relative attractiveness have clear, compatible contexts.
-- [ ] Home and current-market Ask AI agree on the centralized market day. A different market archetype is visibly a separate example scenario.
-- [ ] ABC Technologies is explicitly fictional enterprise software/technology content. No factory proceeds story or unapproved exact IPO values.
-- [ ] Financial values, financial copy, source counts, and scenario outputs come from centralized typed records or explicitly approved deterministic transformations, not component literals.
+- [ ] Home, Explore, Stocks, Decision, and current-state Ask AI resolve the same fictional entity, dataset version, quote, metrics, research snapshot, risk, and valuation under the [synthetic data contract](../data/SYNTHETIC_DATA_CONTRACT.md#canonical-ownership-and-cross-screen-consistency).
+- [ ] Daily changes derive from compatible canonical price endpoints with declared precision; rounded displayed percentages are not reverse-engineered into exact prices.
+- [ ] What Changed views resolve the same compatible previous/current snapshot pair and calculate differences with correct units. Missing history and methodology changes are explicit.
+- [ ] Daily movement, longer-term business health, absolute valuation, and relative attractiveness have clear, compatible contexts.
+- [ ] Home and current-market Ask AI agree on the canonical simulated market day. A different market archetype has distinct identity and visible example context.
+- [ ] Demonstration entities are fictional and approved through data design; real-company/index design examples and their financial values are not canonical dataset content.
+- [ ] IPO terms, financial periods, articles, histories, and source relationships are coherent with their synthetic inputs and timeline.
+- [ ] Financial values, copy, source counts, and scenario outputs use canonical typed records or defined deterministic calculations, never screen-specific literals or duplicated derived values.
 
 ## Explanation and time context
 
@@ -66,21 +67,24 @@ Record the actual route, viewport, state, check method, and result for implement
 - [ ] Financial values have understandable spoken equivalents, including currency, units, direction, and score scale. A score is not announced as confidence or a profit probability.
 - [ ] Meaningful pending/result changes have concise accessible feedback, and reduced-motion preferences are respected.
 
-## Source integrity and mock honesty
+## Source integrity and simulation disclosure
 
-- [ ] Mock provenance exists in the model. One restrained application-level **Prototype · Demo research data** indication remains perceptible on every financial route, including focused flows, without per-component badge noise.
-- [ ] Tata's Evidence Confidence: High is treated as an approved qualitative demo assessment, not an implemented methodology or real-source verification. Infer no source count or percentage. Detailed source chips, counts, and claim-level evidence resolve a separately approved synthetic catalog with stable IDs, categories, and mock provenance, or appear as unavailable under the [source contract](../data/MOCK_DATA_CONTRACT.md#source-count-integrity-and-missing-information). The High assessment remains covered by the application-level prototype indication until a real evidence system exists.
-- [ ] No mock content claims live data, verification, real-time updates, or exchange verification. Documentation/build time is not a fabricated observation time.
-- [ ] Source counts derive from distinct resolved records supporting the relevant claim/section. Preview versus total scope is clear; absent catalogs are unavailable, not invented evidence.
-- [ ] Source details expose actual provenance and availability. Synthetic identities and metadata come only from a separately approved mock catalog; no real publisher, URL, filing title, date, or verification is invented, and no unsupported source count appears.
-- [ ] Missing data is distinct from zero/no change/no results. Exact scenario outcomes, confidence percentages, score calculations, and historical values are not invented.
-- [ ] Observed, calculated, modeled, and AI interpretation layers remain distinct. Approved assessment fixtures are not presented as executed calculations or verified research.
-- [ ] Product strings and accessible labels follow [TERMINOLOGY.md](../product/TERMINOLOGY.md). Search for every prohibited/stale table entry; rejection examples may appear only in that documentation table, never in product copy.
+- [ ] Synthetic provenance exists in the model. **College Project · Simulated financial data** is perceptible across financial experiences, including focused flows, using the later approved placement without huge repeated disclaimers.
+- [ ] PASS: the canonical disclosure with educational/demonstration context. FAIL: “Live NSE,” “verified filings,” or real-exchange verification claims attached to simulated content. Any simulation-context wording must be unmistakably synthetic and cannot reasonably be mistaken for real data or investment advice.
+- [ ] Synthetic publishers do not impersonate real publishers; synthetic filings do not impersonate NSE/BSE/SEBI or actual company filings. No invented URLs to real financial publishers/exchanges, fabricated real-source badges, or misleading unavailable links.
+- [ ] Source details expose actual synthetic provenance and availability. Counts derive from distinct supporting source records in the stated scope; absent catalogs stay unavailable.
+- [ ] Evidence Confidence and Research Picture are not copied from design examples or described as calculated without defined, executed methods. No inferred percentages or source counts.
+- [ ] Dates, freshness, IPO status, and historical evidence cutoffs follow the simulated reference clock, not documentation/build time or the real clock.
+- [ ] Missing data is distinct from zero/no change/no results; unsupported scenarios, historical fields, confidence percentages, and calculation methods remain unavailable.
+- [ ] Synthetic input observations, real calculations, modeled scenarios, and AI interpretation stay distinct. Static demonstration copy does not imply an AI call; later AI answers must ground in canonical records.
+- [ ] Money uses declared exact precision, calculations use compatible unrounded inputs, and histories/financial periods follow the data contract.
+- [ ] If seed generation is implemented later, the same seed/generator version reproduces IDs, inputs, relationships, chronology, and demonstrations.
+- [ ] Product strings and accessible labels follow [TERMINOLOGY.md](../product/TERMINOLOGY.md). Rejection phrases may appear in clearly labeled historical/prohibited documentation examples, not as product claims.
 
 ## Engineering and validation gates
 
-- [ ] Strict TypeScript, small server/client boundaries, centralized domain/mock data, and specific view-model transformations follow the accepted ADRs.
-- [ ] No unapproved dependency/version/configuration change, backend, real data API, AI integration, authentication, or deployment is included.
+- [ ] Strict TypeScript, small server/client boundaries, centralized domain/synthetic data, and specific view-model transformations follow the accepted ADRs.
+- [ ] No unapproved dependency/version/configuration change, backend, API, database, AI integration, authentication, or deployment is included. Full-stack work is intended in explicitly authorized milestones; commercial market-data integration requires an explicit product scope change.
 - [ ] For meaningful implementation milestones, run `pnpm lint` and `pnpm build` as required by AGENTS.md, reporting actual outcomes and any known environment limitation. Target behavioral checks to consistency, navigation, sources, and other concrete risks.
 - [ ] Review the Git diff against the authorized phase. Do not include unrelated changes or commit without authorization.
 

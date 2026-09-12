@@ -1,6 +1,6 @@
 # Market AI
 
-Market AI is a beginner-first, evidence-backed financial research product.
+Market AI is a beginner-first, evidence-backed financial research college / portfolio project. Its intended financial universe is permanently synthetic and fictional; it is not a commercial financial-data product.
 
 It helps users understand stocks, IPOs, market movements, sectors, themes, and financial concepts through plain language, progressive disclosure, transparent evidence, and clearly identified sources.
 
@@ -21,12 +21,12 @@ It helps users understand stocks, IPOs, market movements, sectors, themes, and f
 - Build shared reusable components.
 - Do not duplicate whole components between pages.
 - Centralize design tokens.
-- Centralize typed mock data.
+- Centralize typed synthetic data. Never hardcode screen-specific financial values.
 - Keep business logic separate from presentation.
 - Keep data transformation separate from UI components.
 - Avoid unnecessary dependencies.
 - Do not introduce Redux or another heavy global-state solution without a demonstrated need.
-- Do not add APIs, databases or authentication until explicitly requested.
+- Real backend, database, APIs, research calculations, historical snapshots, What Changed logic, search/filtering, and eventual AI integration are intended application capabilities. Implement each only when explicitly authorized; authentication also requires explicit authorization.
 - Do not deploy unless explicitly requested.
 - Consider frontend engineering, software architecture, maintainability, accessibility, performance, responsive design, security, financial-data integrity, AI reliability, product UX, future scalability, and developer experience before architectural decisions.
 - Optimize for a maintainable real product, not quickly producing screenshots.
@@ -84,33 +84,27 @@ Market AI is not a brokerage, trading terminal, automated trading bot, stock-tip
 
 # Financial-data integrity
 
-Never silently invent stock prices, ratios, company results, news, filings, source counts, financial statements, research scores, scenario probabilities, or confidence percentages.
+Use one canonical, typed synthetic dataset for fictional companies, prices/history, financial statements, articles, filings, IPOs, market conditions, evidence records, scenarios, and historical events. This is the intended college-project dataset, not a temporary substitute for licensed market data. No real-market-data licensing or integration is required; do not add commercial market-data integrations unless the user explicitly changes scope.
 
-During frontend implementation, all financial information must come from centralized, typed, explicitly labelled MOCK DATA. Make the mock status visible wherever financial information is presented; do not present mock content as live or verified evidence. Do not embed financial fixtures directly in UI components.
+The demonstration universe must use fictional entities. Tata Motors, HDFC, ICICI, HAL, Reliance, and other real-company references in Stitch are visual/product-structure references only. Their values, ratios, assessments, articles, and source counts are not canonical data. A later data-design milestone will define fictional entities and the design-example mapping; do not mass-rename UI content now.
 
-Real financial evidence will replace mocks later, when explicitly requested. Missing or unavailable information must remain clearly identified rather than being filled with invented values.
+Use the canonical disclosure **College Project · Simulated financial data**. Financial content is simulated for educational/demonstration use, not live exchange information or investment advice. Placement is defined later; keep disclosure perceptible across financial experiences without huge repetitive disclaimers.
+
+Synthetic inputs do not mean arbitrary application behavior. Calculate derived metrics from canonical stored inputs whenever that is the intended behavior, using defined methods, units, and missing-input handling. All screens and answer prose resolve the same entity/snapshot records; do not duplicate derived values in presentation copy. Never silently invent missing values, scores, probabilities, confidence percentages, or supporting evidence.
+
+The [synthetic data contract](docs/data/SYNTHETIC_DATA_CONTRACT.md) governs identity, precision, time, provenance, and consistency. Missing or unavailable information remains explicit.
 
 # AI principles
 
-AI will eventually explain structured research.
+AI will eventually explain structured research through real retrieval/grounding workflows when implemented. Static demonstration answers must not imply an AI call occurred.
 
-AI must not arbitrarily invent research scores.
-
-Observed data, deterministic research calculations, modeled scenarios, and AI interpretation must remain conceptually separable.
+AI must not arbitrarily invent research scores. Synthetic input observations, deterministic research calculations, modeled scenarios, and AI interpretation remain conceptually separable. Research Picture and Evidence Confidence require defined methodology before being represented as calculated assessments.
 
 # Sources
 
-Every factual research claim in the future real-data system must be traceable to evidence.
+Every research claim must trace to supporting canonical synthetic evidence or calculation inputs, with simulated provenance visible. Source categories may represent financial statements, annual reports, investor presentations, articles, and simulated filings or announcements.
 
-Potential source categories include:
-
-- company filings
-- exchange announcements
-- quarterly results
-- annual reports
-- investor presentations
-- market data
-- reputable financial news
+Synthetic publishers must not impersonate real publishers. Synthetic filings must not impersonate NSE/BSE/SEBI or actual company filings. Invented URLs to real financial publishers or exchanges are prohibited. Counts derive from distinct supporting source records; absent evidence stays unavailable.
 
 # Security
 

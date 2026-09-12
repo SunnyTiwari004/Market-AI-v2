@@ -2,7 +2,9 @@
 
 ## Status
 
-Accepted
+Accepted in part; scope assumptions superseded by [ADR 0006](0006-synthetic-financial-universe.md) on 2026-09-12. Centralized typed domain ownership remains accepted. Canonical real-company fixtures, prototype disclosure, and real-evidence migration assumptions are superseded; backend/database work is permitted in explicitly authorized milestones.
+
+The body below records the historical 2026-09-04 decision, including its Tata/mock fixtures and real-evidence expectations. **[ADR 0006](0006-synthetic-financial-universe.md) and [SYNTHETIC_DATA_CONTRACT.md](../../data/SYNTHETIC_DATA_CONTRACT.md) own the current dataset strategy.** Historical statements below do not authorize those fixtures or plan future real-source ingestion. Links to the data contract resolve its active successor.
 
 ## Date
 
@@ -14,7 +16,7 @@ The same company, quote, research assessment, and source relationships appear ac
 
 ## Decision
 
-Centralize typed entities, listings, quotes, research snapshots, claims, sources, scenarios, explanation copy, and mock provenance. Use the approved [mock data contract](../../data/MOCK_DATA_CONTRACT.md) as the authority for supplied values and unavailable fields. Financial literals belong in centralized fixtures, not components or separately maintained answer prose.
+Centralize typed entities, listings, quotes, research snapshots, claims, sources, scenarios, explanation copy, and mock provenance. Use the approved [synthetic data contract](../../data/SYNTHETIC_DATA_CONTRACT.md) as the authority for supplied values and unavailable fields. Financial literals belong in centralized fixtures, not components or separately maintained answer prose.
 
 Small selectors resolve records and references; small view-model transformations shape approved data for presentation. Keep domain meaning separate from JSX and styling. Use explicit units, identities, and availability. Do not create an elaborate service/repository abstraction or every possible future type before a consumer exists.
 

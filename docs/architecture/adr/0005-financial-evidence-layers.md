@@ -2,7 +2,9 @@
 
 ## Status
 
-Accepted
+Accepted in part; scope assumptions superseded by [ADR 0006](0006-synthetic-financial-universe.md) on 2026-09-12. The four-layer separation remains accepted. Real-evidence migration assumptions and canonical Tata assessment fixtures are superseded by the permanent synthetic universe.
+
+The body below records the historical 2026-09-04 decision, including its Tata/mock fixtures and real-evidence expectations. **[ADR 0006](0006-synthetic-financial-universe.md) and [SYNTHETIC_DATA_CONTRACT.md](../../data/SYNTHETIC_DATA_CONTRACT.md) own the current dataset strategy.** Historical statements below do not authorize those fixtures or plan future real-source ingestion. Links to the data contract resolve its active successor.
 
 ## Date
 
@@ -40,7 +42,7 @@ Future factual claims must connect to supporting evidence. Calculations and scen
 
 Components can present meaning first while preserving the route back to underlying evidence and assumptions. Confidence, source counts, score scales, and outcome probabilities cannot be substituted for one another. No unsupported precision is introduced merely to complete a visual design.
 
-Static demo answer copy can demonstrate interpretation presentation while remaining explicitly mock. It does not imply that a model was called. Missing inputs and sources remain visible under the [mock data contract](../../data/MOCK_DATA_CONTRACT.md).
+Static demo answer copy can demonstrate interpretation presentation while remaining explicitly mock. It does not imply that a model was called. Missing inputs and sources remain visible under the [synthetic data contract](../../data/SYNTHETIC_DATA_CONTRACT.md).
 
 ## Risks
 

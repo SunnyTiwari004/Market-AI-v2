@@ -2,7 +2,7 @@
 
 ## Status
 
-Accepted
+Accepted. Reviewed for the 2026-09-12 scope reset in [ADR 0006](0006-synthetic-financial-universe.md); no state-ownership decision changed. Prototype wording below concerns the initial preference/state strategy, not a permanent frontend-only scope. Backend and persistence work remain subject to explicit milestone authorization.
 
 ## Date
 

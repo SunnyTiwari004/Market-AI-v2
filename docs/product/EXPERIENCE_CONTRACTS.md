@@ -2,7 +2,9 @@
 
 Approved baseline: 2026-09-04. This document specifies approved screen responsibilities, canonical section hierarchy, and interaction boundaries for the six canonical experiences. It is the single owner of their approved screen hierarchy; it does not authorize application implementation, invented financial values, or undefined interactions.
 
-Data values remain governed by [MOCK_DATA_CONTRACT.md](../data/MOCK_DATA_CONTRACT.md), and terminology remains governed by [TERMINOLOGY.md](TERMINOLOGY.md). Layout details remain governed by the selected Stitch references and [DESIGN_SYSTEM.md](../design/DESIGN_SYSTEM.md), subject to the documented authority order. When screenshots conflict with this contract, this contract wins. Responsive presentations must retain the approved meaning and hierarchy.
+Scope reset: 2026-09-12. All financial experiences represent the shared simulated timeline, including “today” and “current.” Real-company/index names in the design examples below are historical visual/product-structure references only, not final dataset entities or approved financial content. Fictional identities and mapping will be defined in a later data-design milestone. The disclosure is **College Project · Simulated financial data**; placement follows the later interaction/design pass.
+
+Data values remain governed by [SYNTHETIC_DATA_CONTRACT.md](../data/SYNTHETIC_DATA_CONTRACT.md), and terminology remains governed by [TERMINOLOGY.md](TERMINOLOGY.md). Layout details remain governed by the selected Stitch references and [DESIGN_SYSTEM.md](../design/DESIGN_SYSTEM.md), subject to the documented authority order. When screenshots conflict with this contract, this contract wins. Responsive presentations must retain the approved meaning and hierarchy.
 
 ## Home / Market Today
 
@@ -51,7 +53,7 @@ Avoid the recommendation/ranking language listed in the [prohibited-term table](
 
 Role: **What should I understand about this company?**
 
-Canonical demo entity: **Tata Motors / TATAMOTORS / NSE**. Its exact financial fixture remains governed by [MOCK_DATA_CONTRACT.md](../data/MOCK_DATA_CONTRACT.md#canonical-tata-motors-current-demo-fixture).
+Historical design entity: **Tata Motors / TATAMOTORS / NSE**. It is not a canonical demonstration entity; no historical price, assessment, or source count is approved for the fictional dataset.
 
 Canonical structure:
 
@@ -65,7 +67,7 @@ Canonical structure:
 8. Quick View
 9. What Looks Good
 10. Needs Attention
-11. Decision CTA: **Thinking of investing in Tata Motors?** → **Help Me Think It Through**
+11. Decision CTA: **Thinking of investing in {company name}?** → **Help Me Think It Through**, resolving the selected fictional company name.
 12. Research pillars: Business Health, Growth Potential, Financial Health
 13. Deep Research
 14. What Changed?
@@ -93,13 +95,13 @@ Mobile shows one question at a time, **Question X of 6**, **Back**, and **Next**
 
 Desktop uses a dedicated route with a focused modal-style panel presentation. Do not create actual modal semantics or intercepted routing. Both presentations share the same question model, research state, and explanation level; ordinary mobile bottom navigation is absent in this focused flow.
 
-The final section is **YOUR RESEARCH SUMMARY**, followed by the primary CTA **View Full Tata Motors Research** for the canonical demo. The summary is not a seventh question. Secondary actions are deferred unless their behavior is approved. Do not issue transaction recommendations; the prohibited recommendation terms remain defined in [TERMINOLOGY.md](TERMINOLOGY.md#prohibited-or-stale-terms).
+The final section is **YOUR RESEARCH SUMMARY**, followed by the primary CTA **View Full {company name} Research**, resolving the selected fictional entity. The summary is not a seventh question. Secondary actions are deferred unless their behavior is approved. Do not issue transaction recommendations; the prohibited recommendation terms remain defined in [TERMINOLOGY.md](TERMINOLOGY.md#prohibited-or-stale-terms).
 
 ## IPO research
 
 Role: **What should I understand about this IPO?**
 
-Canonical fictional example: **ABC Technologies**, an enterprise software / technology company. Exact IPO numbers remain unapproved unless added later to [MOCK_DATA_CONTRACT.md](../data/MOCK_DATA_CONTRACT.md#abc-technologies).
+Historical fictional design example: **ABC Technologies**, an enterprise software / technology company. Inclusion in the final universe and all offer terms await data design under the [synthetic data contract](../data/SYNTHETIC_DATA_CONTRACT.md#ipo-data).
 
 Canonical information architecture:
 
@@ -137,9 +139,9 @@ Include exactly four capability cards:
 3. Explain Something
 4. Understand the Market
 
-For the canonical Tata Motors contextual answer, preserve this hierarchy:
+For the contextual stock answer, preserve this hierarchy, resolving the selected fictional company name:
 
-1. Researching Tata Motors
+1. Researching {company name}
 2. The 60-Second Answer
 3. Key Drivers
 4. Is This Serious?
@@ -153,19 +155,19 @@ Do not introduce response-type tabs. The three named showcase answer archetypes 
 
 | Archetype | Approved example and presentation boundary |
 | --- | --- |
-| COMPARISON | HDFC vs ICICI, presented as a mini comparison table/matrix. The example names do not authorize missing comparison metrics. |
+| COMPARISON | {Company A} vs {Company B}, resolving two fictional companies from the synthetic universe and presented as a mini comparison table/matrix. The archetype does not authorize missing comparison metrics. |
 | CONCEPT | Illustrative example: ₹300 share price ÷ ₹10 annual earnings per share = 30× P/E. These are explicitly supplied teaching values, not an observed company quote or earnings result; any frontend fixture remains centralized under the data contract. |
-| MARKET | Explain a NIFTY decline through clearly labeled contribution/context graphics. Do not imply an additive causal decomposition unless such methodology exists. |
+| MARKET | Explain a simulated market-index decline through clearly labeled contribution/context graphics. Do not imply an additive causal decomposition unless such methodology exists. |
 
 The three archetypes do not replace the contextual stock-answer format. Current-market answers resolve the same market-day fixture as Home. A separate falling-market example must be clearly labeled as an example/demo scenario, rather than contradicting the current demo state.
 
-Unsupported questions in the mock frontend return an honest demo limitation state rather than fabricated AI research. No actual AI integration, new evidence, or undefined deeper workflow is authorized by these answer structures.
+Until AI integration is implemented, unsupported questions return an honest demonstration limitation state rather than fabricated AI research. No actual AI integration, new evidence, or undefined deeper workflow is authorized by these answer structures.
 
 ## What Changed
 
-**What Changed** is a signature reusable MARKET AI concept: previous research state versus current research state over an explicit comparison period. Its canonical Tata numerical state is defined only in [MOCK_DATA_CONTRACT.md](../data/MOCK_DATA_CONTRACT.md#what-changed-approved-30-day-comparison).
+**What Changed** is a signature reusable MARKET AI concept: previous research state versus current research state over an explicit comparison period. No historical Tata numerical state is canonical; snapshot integrity is governed by the [synthetic data contract](../data/SYNTHETIC_DATA_CONTRACT.md#research-snapshots-and-what-changed).
 
-All presentations resolve the same compatible snapshot references. The frontend architecture anticipates a future What Changed engine through those structured references, but this frontend phase does not implement that engine. Section labels do not authorize additional history, causes, metrics, or calculations.
+All presentations resolve the same compatible snapshot references. The intended application will execute real What Changed comparisons on synthetic snapshots; this documentation-only milestone does not implement the engine. Section labels do not authorize additional history, causes, metrics, or calculations.
 
 ## Contextual education
 

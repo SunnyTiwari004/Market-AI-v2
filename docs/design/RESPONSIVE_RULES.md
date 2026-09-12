@@ -78,4 +78,4 @@ Mobile may progressively disclose supporting detail, but must not silently remov
 
 A single semantic comparison table may scroll within a labeled region when its relationships require two dimensions. Page-wide horizontal scrolling is unacceptable. Preserve table headings, units, and accessible names. Do not compress essential labels to fit a screenshot.
 
-Check text enlargement, 200% zoom, and reflow at a 320px effective width. Targets should generally be around 44px or larger. Use accessible button/link semantics, visible focus, meaningful status text, and reduced-motion behavior. Keep the persistent application-level prototype indication present on every financial route, including focused pages.
+Check text enlargement, 200% zoom, and reflow at a 320px effective width. Targets should generally be around 44px or larger. Use accessible button/link semantics, visible focus, meaningful status text, and reduced-motion behavior. Keep the canonical **College Project · Simulated financial data** disclosure perceptible across financial routes, including focused pages; exact placement is defined later.

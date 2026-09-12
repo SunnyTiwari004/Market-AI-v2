@@ -61,7 +61,7 @@ Inter is the canonical typeface, with a system sans-serif fallback. Use Next.js 
 | Label | 14px | 14px | 500–600 | 1.4 |
 | Metadata | 12px | 12px | 400–500 | 1.5 |
 
-Implement sizes in rem and allow wrapping and container growth. Important prices, status, risk, confidence, scenario labels, and actions should generally be at least 14px. Do not reproduce 8–9px financial text. Reserve 12px for supporting metadata, including a readable prototype indication, not essential financial meaning.
+Implement sizes in rem and allow wrapping and container growth. Important prices, status, risk, confidence, scenario labels, and actions should generally be at least 14px. Do not reproduce 8–9px financial text. Reserve 12px for supporting metadata, including a readable simulation disclosure, not essential financial meaning.
 
 Use tabular numerals for aligned financial values. Use weight and spacing before adding font sizes. Avoid excessive uppercase headings. Give scores and prices prominence without letting them overpower their explanation.
 
@@ -113,4 +113,4 @@ Use semantic headings, one main landmark, correctly labeled inputs, and a readin
 
 Help must open through keyboard, click, and tap; hover can supplement it. Modal sheets need a name, appropriate initial focus, contained focus, Escape, a visible close action, and focus return. A dedicated decision page styled like a panel remains a page and must not be given false modal semantics.
 
-Respect reduced motion, enlarged text, zoom, safe areas, and visible focused content. The application-level prototype notice remains present in both standard and focused shells; do not add a loud demo badge to every financial component.
+Respect reduced motion, enlarged text, zoom, safe areas, and visible focused content. The canonical **College Project · Simulated financial data** disclosure must cover standard and focused financial experiences. Exact placement belongs to the later interaction/design pass; do not add large repeated disclaimers.

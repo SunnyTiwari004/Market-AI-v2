@@ -1,10 +1,10 @@
 # MARKET AI product principles
 
-Approved documentation baseline: 2026-09-04. This document records product intent for future frontend implementation; it does not authorize implementation or integrations.
+Approved documentation baseline: 2026-09-04. Scope reset: 2026-09-12. This document records product intent for the full-stack college / portfolio project; it does not authorize implementation or integrations.
 
 ## Purpose
 
-MARKET AI is a beginner-first, evidence-backed financial research experience. It helps people understand stocks, IPOs, market movements, sectors, themes, and financial concepts through plain language, progressive disclosure, transparent evidence, and clearly identified sources.
+MARKET AI is a beginner-first, evidence-backed financial research college / portfolio project. It helps people understand stocks, IPOs, market movements, sectors, themes, and financial concepts through plain language, progressive disclosure, transparent evidence, and clearly identified sources.
 
 The product supports understanding and a person's own decision process. It is not a brokerage, trading terminal, execution platform, automated trading bot, stock-tip service, or guaranteed prediction system. Research conclusions must not become authoritative transaction instructions.
 
@@ -49,7 +49,7 @@ There are exactly three levels, with **Simple** as the default:
 
 All levels explain the same underlying research and conclusions. Changing level must not change the quote, score, risk, valuation, confidence, source set, or scenario assumptions. Additional detail must remain traceable to the same records. When deeper information is unavailable, say so rather than generating it.
 
-Use one consistent mobile explanation dropdown on Home, Explore, Stock, IPO, and Ask AI. The stock decision experience inherits the current level. URL state is approved for this prototype; it is not a final account preference persistence design. Authenticated preference behavior is deferred in [ADR 0004](../architecture/adr/0004-prototype-state-strategy.md).
+Use one consistent mobile explanation dropdown on Home, Explore, Stock, IPO, and Ask AI. The stock decision experience inherits the current level. URL state is approved for the initial research experience; it is not a final account preference persistence design. Authenticated preference behavior is deferred in [ADR 0004](../architecture/adr/0004-prototype-state-strategy.md).
 
 ## Experience responsibilities
 
@@ -61,12 +61,18 @@ The `/stocks` and `/ipos` destinations are limited directory/entry experiences p
 
 ## Financial trust
 
-All prototype financial information must resolve from centralized, typed mock data with provenance in the model. Display one restrained, persistent application-level notice: **Prototype · Demo research data**. It must cover every route containing financial information, including the focused decision experience, and remain perceptible while that information is used. Repeated loud badges on individual financial components are unnecessary.
+The intended financial universe is permanently synthetic and fictional. It is not a temporary substitute for licensed market feeds. Frontend, backend, database, APIs, calculations, research engine, historical snapshots, What Changed, search/filtering, and eventual AI grounding are real application work, implemented in explicitly authorized milestones.
 
-Never claim that mock information is live, verified, real-time, or exchange verified. Source details must describe their actual mock status and availability. Future real-data behavior will replace the prototype notice with proper provenance and freshness metadata.
+Use one canonical disclosure: **College Project · Simulated financial data**. It establishes educational/demonstration use, simulated financial content, and that content is neither live exchange information nor investment advice. Its exact placement belongs to the later interaction/design pass; it must cover financial experiences including the focused decision flow without large repeated disclaimers.
 
-Do not invent exact financial figures, source counts, dates, score methods, probabilities, or confidence percentages. Missing data remains unavailable. Approved demo assessments are fixtures, not proof that a calculation or verification has occurred.
+The final demonstration universe uses fictional companies. Real companies and financial values in Stitch are visual and product-structure references only. The later data-design milestone defines canonical fictional identities and migration mapping; this reset does not perform UI/content renames or approve design values.
 
-Keep observed data, deterministic calculations, modeled scenarios, and AI interpretation separate. Future AI may explain structured research; it must not invent scores or upgrade an unsupported claim into evidence. Every future factual research claim must be traceable to its supporting evidence.
+Synthetic publishers must not impersonate real publishers; simulated filings must not impersonate NSE/BSE/SEBI or actual company filings. Invented URLs to real publishers or exchanges are prohibited. Source details expose simulated provenance and availability; research claims trace to canonical synthetic evidence.
 
-The [mock data contract](../data/MOCK_DATA_CONTRACT.md) owns the approved fixture values. [Terminology](TERMINOLOGY.md) owns canonical and prohibited wording.
+Synthetic input data and real application logic are distinct. Revenue, EPS, debt, prices, and articles may be synthetic; growth, P/E, financial-health rules, scenario computation, What Changed comparison, database queries, and AI retrieval/grounding must execute real logic when implemented. Research Picture and confidence methods require defined methodology. Do not imply an unimplemented method has run.
+
+One canonical dataset supplies each entity/state across every route and explanation level. Derived values must be calculated from canonical stored inputs when that is intended product behavior, then reused in metrics and prose. Missing values, methods, sources, and unsupported precision stay unavailable.
+
+Keep synthetic input observations, deterministic calculations, modeled scenarios, and AI interpretation separate. AI may explain structured research; it must not invent scores or upgrade interpretation into evidence.
+
+The [synthetic data contract](../data/SYNTHETIC_DATA_CONTRACT.md) owns data integrity rules; it does not yet approve a company universe or numerical fixtures. [Terminology](TERMINOLOGY.md) owns canonical and prohibited wording.

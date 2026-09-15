@@ -8,7 +8,7 @@ The intended dataset is permanently synthetic: companies, stock prices/history, 
 
 The application behavior is real when implemented: frontend/backend, database/APIs, routing, search/filtering, queries, calculations, research engine, historical snapshots, What Changed, AI retrieval/grounding, accessibility, testing, CI/CD, and deployment. Each milestone requires explicit authorization.
 
-Use **College Project · Simulated financial data** as the canonical disclosure. Content is simulated for educational/demonstration use, not live exchange information or investment advice. The later interaction/design pass defines exact placement across financial experiences, including focused routes, without huge repeated disclaimers. Source details still expose simulated provenance and availability.
+Use **College Project · Simulated financial data** as the canonical disclosure. Content is simulated for educational/demonstration use, not live exchange information or investment advice. [INT-018](../product/INTERACTION_CONTRACTS.md#int-018-release-exclusions-and-trust) defines placement across financial experiences, including focused routes, without huge repeated disclaimers. Source details still expose simulated provenance and availability.
 
 ## Fictional entities and stable identity
 

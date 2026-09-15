@@ -113,4 +113,26 @@ Use semantic headings, one main landmark, correctly labeled inputs, and a readin
 
 Help must open through keyboard, click, and tap; hover can supplement it. Modal sheets need a name, appropriate initial focus, contained focus, Escape, a visible close action, and focus return. A dedicated decision page styled like a panel remains a page and must not be given false modal semantics.
 
-Respect reduced motion, enlarged text, zoom, safe areas, and visible focused content. The canonical **College Project · Simulated financial data** disclosure must cover standard and focused financial experiences. Exact placement belongs to the later interaction/design pass; do not add large repeated disclaimers.
+Respect reduced motion, enlarged text, zoom, safe areas, and visible focused content. The canonical **College Project · Simulated financial data** disclosure must cover standard and focused financial experiences. Placement follows [INT-018](../product/INTERACTION_CONTRACTS.md#int-018-release-exclusions-and-trust) and the presentation below; do not add large repeated disclaimers.
+
+## Gate 2.5 controls and trust
+
+Observable mechanics are owned by [interaction contracts](../product/INTERACTION_CONTRACTS.md), not independently redefined here. Static cards/statuses must not use pointer cursors, hover-only action styling or decorative chevrons. Distinguish navigation, actions and informational badges. Preserve visible focus, growing labels and generally 44px targets; do not copy tiny reference controls.
+
+Source citations and counts must look actionable only when they open actual records. Differentiate a source list, individual record and Filings destination through labels. Share feedback uses a concise readable status and actionable failure recovery, without a navigation toast. State components distinguish empty dataset, no results, unavailable, partial and error; avoid inventing a full page for every case.
+
+Desktop informational help uses a nonmodal popover whose trigger retains focus; mobile uses a modal sheet with initial/contained focus and restoration, as specified by INT-006. Exact dimensions, placement and detailed styling for the required references are not prescribed before design.
+
+Present **College Project · Simulated financial data** near the top of standard financial routes and in the focused Decision header. Use restrained readable metadata, not a giant warning on each card. Financial as-of labels and simulated source identity supplement it without implying live information or verification.
+
+## Gate 2.5 reference handoff
+
+Required before the relevant frontend implementation, not created in this documentation pass:
+
+1. Pro Stock mobile representative dense section.
+2. Pro Ask AI mobile representative answer.
+3. Explore mobile Filters sheet.
+4. Context Help desktop popover.
+5. Context Help mobile bottom sheet.
+
+Helpful but nonblocking: Pro Stock desktop, Pro Ask desktop, Decision summary mobile, and a shared loading/error/empty state board. Whole Normal-mode screen sets and dedicated directory/404 references are not required; use contracts and shared patterns. These references must not establish new financial datasets or calculation methods.

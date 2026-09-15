@@ -23,7 +23,7 @@ The repository currently has the foundation and documentation; product backend, 
 | [0005](adr/0005-financial-evidence-layers.md) | Four evidence layers retained; real-evidence migration assumption superseded by 0006. |
 | [0006](adr/0006-synthetic-financial-universe.md) | Permanent fictional synthetic universe with real application logic. |
 
-The [product principles](../product/PRODUCT_PRINCIPLES.md#documentation-authority) define documentation authority. [EXPERIENCE_CONTRACTS.md](../product/EXPERIENCE_CONTRACTS.md) is the single owner of approved screen responsibilities, hierarchy, and interaction boundaries. [SYNTHETIC_DATA_CONTRACT.md](../data/SYNTHETIC_DATA_CONTRACT.md) owns synthetic data integrity; UI specifications must not create alternative versions.
+The [product principles](../product/PRODUCT_PRINCIPLES.md#documentation-authority) define documentation authority. [EXPERIENCE_CONTRACTS.md](../product/EXPERIENCE_CONTRACTS.md) owns screen responsibilities and hierarchy. [INTERACTION_CONTRACTS.md](../product/INTERACTION_CONTRACTS.md) owns observable behavior/history; [EXPLANATION_LEVELS.md](../product/EXPLANATION_LEVELS.md) owns explanation depth. [SYNTHETIC_DATA_CONTRACT.md](../data/SYNTHETIC_DATA_CONTRACT.md) owns synthetic data integrity; UI specifications must not create alternative versions.
 
 ## App Router and rendering boundaries
 
@@ -47,28 +47,28 @@ Pass only required serializable data to client boundaries. Do not send the entir
 | --- | --- |
 | `/` | Home / Market Today briefing. |
 | `/explore` | Cross-category discovery with understandable research filters. |
-| `/stocks` | Limited stock directory/entry experience; full product specification pending. |
+| `/stocks` | Bounded beginner-first Stock directory; scope defined in the experience contract. |
 | `/stocks/[symbol]` | Shared stock entity page; fictional instances await data design. |
 | `/stocks/[symbol]/decision` | Shared six-question stock decision experience. |
-| `/ipos` | Limited IPO directory/entry experience; full product specification pending. |
+| `/ipos` | Bounded IPO directory by simulated status/date; scope defined in the experience contract. |
 | `/ipos/[slug]` | Shared IPO entity page; fictional instances await data design. |
 | `/ask` | Demo research answers and approved comparison, concept, and market archetypes. |
 
 Map URL symbols/slugs to explicit entity and listing records. Canonical stock URLs use lowercase symbols while display retains uppercase tickers. A ticker alone is not a globally unique company/listing identity. Unknown entities return a proper not-found result; never substitute another entity for an unknown symbol.
 
-The [Stock experience contract](../product/EXPERIENCE_CONTRACTS.md#stock-research) owns stock navigation labels and section order. If an approved view is implemented, addressable navigation may use `view`; navigation styled as tabs remains links. Do not invent financial detail for unprovided views. Use explicit unavailable states or defer the view until its content is approved.
+The [Stock experience contract](../product/EXPERIENCE_CONTRACTS.md#stock-research) owns stock navigation labels and section order. If an approved view is implemented, addressable navigation may use `view`; navigation styled as tabs remains links. Do not invent financial detail for unprovided views. Final Release 1 targets all six bounded views under [INT-012](../product/INTERACTION_CONTRACTS.md#int-012-stock-and-six-view-contracts). Development slices expose a view only when functioning; unavailable/partial states apply to missing records within implemented views, not unfinished tab destinations.
 
-Do not create `/ipos/[slug]/decision` in the initial phase. Its framework is deferred. Reference CTAs do not authorize reusing stock questions or creating a dead destination. Full `/stocks` and `/ipos` designs also remain deferred; keep their initial scope to useful entry links to approved entities.
+Do not create `/ipos/[slug]/decision` in the initial phase. Its framework is deferred. Reference CTAs do not authorize reusing stock questions or creating a dead destination. Both directory responsibilities are now specified. Their complete bounded datasets may render without pagination; no page-count state or paging architecture is mandated.
 
 ## Shared shell and decision experience
 
-An `AppShell` accepts explicit active section, explanation context, and standard/focused mode from the page. It owns landmarks, navigation space, and the canonical simulation disclosure; its exact placement is defined in the later interaction/design pass. `PageContainer` handles measures and gutters without introducing a second main landmark. One navigation definition feeds desktop and mobile presentations.
+An `AppShell` accepts explicit active section, explanation context, and standard/focused mode from the page. It owns landmarks, navigation space, and the canonical simulation disclosure; placement follows [INT-018](../product/INTERACTION_CONTRACTS.md#int-018-release-exclusions-and-trust). `PageContainer` handles measures and gutters without introducing a second main landmark. One navigation definition feeds desktop and mobile presentations.
 
 Do not place the entire stock header in a parent layout that automatically wraps the decision route. The decision page selects focused mode before rendering and hides ordinary mobile bottom navigation. Desktop is a dedicated route with a focused modal-style panel; mobile is a dedicated page showing one question at a time. No intercepted-route modal architecture is approved. The desktop panel remains a page, without a fake background Stock screen or modal focus trap.
 
 One ordered stock question model supplies both presentations. The [decision experience contract](../product/EXPERIENCE_CONTRACTS.md#help-me-think-it-through) owns the six questions, sequence, summary, and CTA text. The summary derives from the same research snapshot rather than a new recommendation score. Its return-to-research action must work on direct entry, preserve level/horizon, and not depend on previous browser history.
 
-Question progress, content, and research logic have one owner. Resizing must not reset them. Additional summary actions or a question index are introduced only when their behavior is defined.
+Question progress, content, and research logic have one owner. Resizing must not reset them. The question index is defined in [INT-013](../product/INTERACTION_CONTRACTS.md#int-013-decision-flow); additional summary actions remain deferred.
 
 ## State ownership
 
@@ -80,16 +80,18 @@ Question progress, content, and research logic have one owner. Resizing must not
 | Applied Explore filters, submitted entity-search query | URL | Only approved, validated filter/query values. |
 | Stock view | URL | Validate against implemented, approved views; default Overview. |
 | Decision step | URL | Question 1–6 or summary; missing/invalid step resolves to question 1. |
-| Selected demo answer/context | Safe URL identifier where useful | Reference an approved entity/scenario; arbitrary text must not become an answer fixture. |
-| Filter draft, help open state, disclosures | Native/local | Canceling a draft does not apply filters. |
-| Ask AI draft and unsubmitted follow-up text | Local | Do not put free-form drafts in URLs. |
+| Selected Ask intent/context | Safe URL identifier where useful | Validated prompt/concept/entity/comparison IDs; arbitrary text cannot become a fixture. |
+| Filter drafts, help, sheets, source readers, chart point, disclosures | Native/local | No history; source readers have no dedicated route in Release 1. |
+| Ask AI draft and active session conversation | Local | No free-form text in URLs or persistent Recent Questions; refresh restores safe context, not fabricated answers. |
 | Quote, score, risk, confidence, valuation, changes | Server-derived | Resolve centralized records; never editable URL/UI state. |
 
 Parse URL values once through a small shared helper. Reject unsupported or ambiguous repeated values using documented defaults. Preserve applicable level, horizon, and entity context across navigation; drop unrelated page-specific filters. Back/Forward and refresh must reconstruct addressable state. Do not create competing URL, context, cookie, and local-storage owners.
 
 Research Horizon is distinct from a scenario's own window and a change comparison period. A missing horizon-specific assessment remains unavailable; changing a label cannot manufacture new research.
 
-URL explanation state is a prototype decision, not final authenticated preference architecture. Account persistence, cross-device synchronization, cookies/local-storage precedence, watchlist persistence, and conversation history are deferred. A small page-scoped help coordinator may be added if demonstrated reuse requires it; it must not become a global financial store.
+The URL owns the active explanation level; depth is selected from shared research by the explanation contract, with no separate desktop/mobile business logic. This is not authenticated preference architecture. Account persistence, cross-device synchronization, cookies/local-storage precedence, watchlist persistence, and conversation history are deferred. A small page-scoped help coordinator may be added if demonstrated reuse requires it; it must not become a global financial store.
+
+History mutation is owned by [INT-003](../product/INTERACTION_CONTRACTS.md#int-003-history-policy): push meaningful navigation/research/result changes, replace level and normalization, keep transient UI local. Route restoration parses the same URL state on direct entry, refresh and Back/Forward; it must not depend on a prior mounted page. Source readers are a local interaction boundary over canonical records, not a new backend or routing architecture.
 
 ## Domain, selectors, and view models
 
@@ -148,12 +150,6 @@ Protect real risks through the [acceptance checklist](../qa/FRONTEND_ACCEPTANCE.
 
 ## Unresolved product decisions and deferred work
 
-- Full Stocks/IPOs landing specifications and the scope/content of deeper stock views.
-- IPO-specific decision questions and behavior; no initial IPO decision route.
-- Exact IPO amounts, dates, year, status timeline, offer terms, demand, ownership, valuation, and listing scenarios.
-- Additional company, sector, comparison, pillar, technical, scenario, source-document, and explanation-depth fixtures. The fictional universe, timeline, and design-example mapping are still to be defined; historical company and market-day values are not approved inputs.
-- Complete question-level supporting content, any question-index shortcut, and optional decision-summary actions beyond the return to full research.
-- Unapproved supporting content within the canonical stock hierarchy and any remaining reference/export omissions. The approved section order is now owned by the experience contract.
-- Profile, watchlist, sharing, unsupported controls, and persistent preference/history behavior. These require defined behavior before presentation as working features.
+Product behavior for directories, six Stock views, sources, Share, explanation levels and Decision index is specified by the product contracts. Remaining dependencies are fictional identities/timeline and numerical records; approved assessment/scenario methodologies; supporting question/article/filing content; and separately authorized backend/API/AI design and implementation.
 
-These gaps do not prevent documenting or implementing a separately authorized narrow foundation. They do prevent filling missing content with invented financial precision or presenting undefined interactions as complete.
+The [release exclusions](../product/INTERACTION_CONTRACTS.md#int-018-release-exclusions-and-trust) remain unexposed. No mandatory pagination architecture is selected; reconsider only when final dataset size justifies it. [README requirements handoff](../../README.md#requirements-handoff-before-implementation) records the concise requirements baseline needed before application implementation. This document does not select backend services, schema, storage or API contracts.

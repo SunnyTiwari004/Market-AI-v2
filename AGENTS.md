@@ -88,7 +88,7 @@ Use one canonical, typed synthetic dataset for fictional companies, prices/histo
 
 The demonstration universe must use fictional entities. Tata Motors, HDFC, ICICI, HAL, Reliance, and other real-company references in Stitch are visual/product-structure references only. Their values, ratios, assessments, articles, and source counts are not canonical data. A later data-design milestone will define fictional entities and the design-example mapping; do not mass-rename UI content now.
 
-Use the canonical disclosure **College Project · Simulated financial data**. Financial content is simulated for educational/demonstration use, not live exchange information or investment advice. Placement is defined later; keep disclosure perceptible across financial experiences without huge repetitive disclaimers.
+Use the canonical disclosure **College Project · Simulated financial data**. Financial content is simulated for educational/demonstration use, not live exchange information or investment advice. Placement follows [the interaction trust contract](docs/product/INTERACTION_CONTRACTS.md#int-018-release-exclusions-and-trust); keep disclosure perceptible across financial experiences without huge repetitive disclaimers.
 
 Synthetic inputs do not mean arbitrary application behavior. Calculate derived metrics from canonical stored inputs whenever that is the intended behavior, using defined methods, units, and missing-input handling. All screens and answer prose resolve the same entity/snapshot records; do not duplicate derived values in presentation copy. Never silently invent missing values, scores, probabilities, confidence percentages, or supporting evidence.
 

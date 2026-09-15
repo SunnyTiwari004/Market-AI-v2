@@ -20,7 +20,7 @@ The intended application includes real frontend, backend, database, APIs, routin
 
 Use fictional companies and one canonical synthetic dataset. Real-company Stitch references are visual/product-structure examples only. A later data-design milestone defines fictional identities and mapping; this decision approves no financial rows, mass UI renames, schemas, or methodologies.
 
-Use **College Project · Simulated financial data** as the canonical disclosure. Financial content is educational/demonstration material, not live exchange information or investment advice. Exact placement is deferred without requiring large repeated disclaimers. Prohibit real-publisher/exchange/regulator/company-filing impersonation and invented URLs to real financial publishers or exchanges.
+Use **College Project · Simulated financial data** as the canonical disclosure. Financial content is educational/demonstration material, not live exchange information or investment advice. Placement was deferred at this decision date; the accepted Gate 2.5 [interaction trust contract](../../product/INTERACTION_CONTRACTS.md#int-018-release-exclusions-and-trust) now specifies it without large repeated disclaimers. Prohibit real-publisher/exchange/regulator/company-filing impersonation and invented URLs to real financial publishers or exchanges.
 
 Synthetic inputs must feed real, defined calculations when implemented. Reuse canonical inputs and derived outputs across routes and prose. The [synthetic data contract](../../data/SYNTHETIC_DATA_CONTRACT.md) governs stable identity, precision, simulated time, evidence, snapshots, scenarios, availability, and reproducibility.
 

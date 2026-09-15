@@ -31,7 +31,7 @@ Approved baseline: 2026-09-04. Apply these terms across routes, controls, access
 | Regular Individual Investors | Beginner IPO investor category label. |
 | Fresh Issue | Newly issued shares; proceeds go to the company. |
 | Offer for Sale (OFS) | Existing owners sell shares; proceeds go to those selling owners, not to the company's bank account. |
-| College Project · Simulated financial data | Canonical educational/demonstration disclosure for the synthetic financial universe; exact placement is defined later. |
+| College Project · Simulated financial data | Canonical educational/demonstration disclosure for the synthetic financial universe; placement follows [INT-018](INTERACTION_CONTRACTS.md#int-018-release-exclusions-and-trust). |
 
 ## Explanation level
 

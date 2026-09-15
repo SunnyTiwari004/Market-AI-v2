@@ -78,4 +78,14 @@ Mobile may progressively disclose supporting detail, but must not silently remov
 
 A single semantic comparison table may scroll within a labeled region when its relationships require two dimensions. Page-wide horizontal scrolling is unacceptable. Preserve table headings, units, and accessible names. Do not compress essential labels to fit a screenshot.
 
-Check text enlargement, 200% zoom, and reflow at a 320px effective width. Targets should generally be around 44px or larger. Use accessible button/link semantics, visible focus, meaningful status text, and reduced-motion behavior. Keep the canonical **College Project · Simulated financial data** disclosure perceptible across financial routes, including focused pages; exact placement is defined later.
+Check text enlargement, 200% zoom, and reflow at a 320px effective width. Targets should generally be around 44px or larger. Use accessible button/link semantics, visible focus, meaningful status text, and reduced-motion behavior. Keep the canonical **College Project · Simulated financial data** disclosure perceptible across financial routes, including focused pages; placement follows [INT-018](../product/INTERACTION_CONTRACTS.md#int-018-release-exclusions-and-trust).
+
+## Gate 2.5 interaction adaptation
+
+Bound horizontal scrolling to labeled chip rails, compact discovery rails, Stock navigation and genuinely wide tables. Show continuation and keep keyboard-focused items visible. Never apply global overflow-x hiding to conceal a layout defect. Preserve table headers/units; Pro density uses disclosure or a bounded table rather than smaller critical text.
+
+Test 320 effective reflow alongside the standard widths, landscape, tablet, 200% zoom and long labels. Fixed/sticky regions remain compact; full Stock financial context stays in document flow. Bottom navigation includes safe-area clearance and cannot cover the composer or Send when the keyboard opens. Restore list scroll and focused content without hiding them beneath sticky elements.
+
+The mobile Explore Filters trigger remains outside its horizontal category rail. Its modal sheet supports readable groups, draft/apply/cancel/reset, internal scroll, keyboard and safe areas under [INT-009](../product/INTERACTION_CONTRACTS.md#int-009-filter-profile-f-and-bounded-lists). Mobile Ask exposes all four entry capabilities. Mobile sectors retain reason and concern; disclosures cannot silently remove meaning.
+
+Desktop help keeps focus on its trigger; mobile modal help moves/traps/restores focus under [INT-006](../product/INTERACTION_CONTRACTS.md#int-006-context-help-profile-h). Resizing uses the same content/state and never strands focus. The five visual prerequisites are tracked in [design handoff](DESIGN_SYSTEM.md#gate-25-reference-handoff), without prescribing their unfinished compositions here.

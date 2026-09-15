@@ -28,6 +28,8 @@ Run `pnpm lint` to lint the project and `pnpm build` to create a production buil
 - [Repository instructions](AGENTS.md)
 - [Product principles](docs/product/PRODUCT_PRINCIPLES.md)
 - [Experience contracts](docs/product/EXPERIENCE_CONTRACTS.md)
+- [Explanation levels](docs/product/EXPLANATION_LEVELS.md)
+- [Interaction contracts](docs/product/INTERACTION_CONTRACTS.md)
 - [Terminology](docs/product/TERMINOLOGY.md)
 - [Design system](docs/design/DESIGN_SYSTEM.md)
 - [Responsive rules](docs/design/RESPONSIVE_RULES.md)
@@ -35,6 +37,12 @@ Run `pnpm lint` to lint the project and `pnpm build` to create a production buil
 - [Synthetic data contract](docs/data/SYNTHETIC_DATA_CONTRACT.md)
 - [Frontend acceptance](docs/qa/FRONTEND_ACCEPTANCE.md)
 - [Architecture decision records](docs/architecture/adr/)
+
+## Requirements handoff before implementation
+
+Gate 2.5 audit accepted; the 2026-09-13 contract pass records product behavior and explanation depth. This is documentation completion, not implementation readiness. Before application implementation, establish a concise baseline covering PRD / MVP scope, measurable NFRs where justified, requirement traceability, the synthetic data model, and backend/API architecture. Do not invent latency or reliability targets. Experience and interaction contracts already supply much of the functional specification; do not duplicate them into a large FSD without a genuine gap. No PRD/NFR documents, schemas, numerical datasets or backend design are created in this pass.
+
+The five [required visual references](docs/design/DESIGN_SYSTEM.md#gate-25-reference-handoff) are needed before their relevant frontend implementation. Final Release 1 includes all six Stock views; separately authorized development can proceed through verified vertical slices without exposing unfinished views as completed functionality.
 
 ## Development rules
 

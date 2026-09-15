@@ -125,6 +125,8 @@ Never introduce these names into product branding or copy:
 
 # Workflow
 
+Use the [PRD](docs/product/PRD.md) for final Release-1 scope and dataset coverage, [NFRs](docs/product/NON_FUNCTIONAL_REQUIREMENTS.md) for quality requirements, and [requirement traceability](docs/product/REQUIREMENT_TRACEABILITY.md) for coverage and verification status. These specifications do not authorize implementation. Existing experience, explanation, interaction and data contracts retain their detailed ownership; an early development slice is not the completed release.
+
 Before major architectural changes:
 
 - explain the rationale

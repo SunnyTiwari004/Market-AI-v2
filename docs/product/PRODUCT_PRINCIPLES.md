@@ -22,6 +22,8 @@ Resolve conflicts in this order:
 
 The approved architecture analysis and the 2026-09-04 approval overrides are consolidated into this baseline. The overrides resolve earlier alternatives. Do not restore superseded proposals from that analysis. A future requirement that changes an accepted decision requires an explicit update to the governing documentation.
 
+The [PRD](PRD.md) owns final Release-1 scope, bounded dataset coverage and completion criteria. [Non-functional requirements](NON_FUNCTIONAL_REQUIREMENTS.md) own quality requirements; [requirement traceability](REQUIREMENT_TRACEABILITY.md) maps requirements to dependencies and verification. They complement the existing experience/depth/interaction/data owners and do not authorize implementation or numerical fixtures.
+
 Selected references inform hierarchy, composition, spacing, density, and responsive intent. Their financial values, text, classes, icon choices, and generated markup are not independent product authority. Never copy stale `DESIGN.md` rules. The abandoned prototype is outside the permitted reference set.
 
 ## Meaning First, Data Second

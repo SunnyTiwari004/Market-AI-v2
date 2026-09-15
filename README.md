@@ -27,6 +27,9 @@ Run `pnpm lint` to lint the project and `pnpm build` to create a production buil
 
 - [Repository instructions](AGENTS.md)
 - [Product principles](docs/product/PRODUCT_PRINCIPLES.md)
+- [PRD and Release-1 scope](docs/product/PRD.md)
+- [Non-functional requirements](docs/product/NON_FUNCTIONAL_REQUIREMENTS.md)
+- [Requirement traceability](docs/product/REQUIREMENT_TRACEABILITY.md)
 - [Experience contracts](docs/product/EXPERIENCE_CONTRACTS.md)
 - [Explanation levels](docs/product/EXPLANATION_LEVELS.md)
 - [Interaction contracts](docs/product/INTERACTION_CONTRACTS.md)
@@ -40,7 +43,7 @@ Run `pnpm lint` to lint the project and `pnpm build` to create a production buil
 
 ## Requirements handoff before implementation
 
-Gate 2.5 audit accepted; the 2026-09-13 contract pass records product behavior and explanation depth. This is documentation completion, not implementation readiness. Before application implementation, establish a concise baseline covering PRD / MVP scope, measurable NFRs where justified, requirement traceability, the synthetic data model, and backend/API architecture. Do not invent latency or reliability targets. Experience and interaction contracts already supply much of the functional specification; do not duplicate them into a large FSD without a genuine gap. No PRD/NFR documents, schemas, numerical datasets or backend design are created in this pass.
+Gate 2.5 audit accepted; the 2026-09-13 contracts record product behavior and explanation depth. The 2026-09-15 [Product Baseline](docs/product/PRD.md) now defines final Release-1 scope and coverage, with [NFRs](docs/product/NON_FUNCTIONAL_REQUIREMENTS.md) and [traceability](docs/product/REQUIREMENT_TRACEABILITY.md). This is specification completion, not implementation readiness. Before application implementation, separately establish fictional identities/timeline, numerical records, approved research methodologies, the synthetic data model, backend/API and AI architecture, and environment-based performance/resource budgets. Existing experience and interaction contracts remain the functional mechanics authority; no large duplicate FSD is needed. No schema, numerical dataset or backend implementation is created in this pass.
 
 The five [required visual references](docs/design/DESIGN_SYSTEM.md#gate-25-reference-handoff) are needed before their relevant frontend implementation. Final Release 1 includes all six Stock views; separately authorized development can proceed through verified vertical slices without exposing unfinished views as completed functionality.
 

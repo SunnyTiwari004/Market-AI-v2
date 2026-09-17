@@ -150,6 +150,8 @@ Protect real risks through the [acceptance checklist](../qa/FRONTEND_ACCEPTANCE.
 
 ## Unresolved product decisions and deferred work
 
+System Design Gate 1 (2026-09-16) specifies [backend/data access](BACKEND_ARCHITECTURE.md), [server interfaces](API_CONTRACT.md), [the logical data model](../data/DATA_MODEL.md) and [research methodology](../research/RESEARCH_METHODOLOGY.md). [ADR 0007](adr/0007-postgresql-and-drizzle.md) and [ADR 0008](adr/0008-server-use-cases-and-structured-retrieval.md) record the new design recommendations for review, without changing the accepted responsive, state or explanation contracts. The remaining-dependency paragraph below describes the earlier frontend handoff; those technical designs are now specified but unimplemented, while actual records, content and integration/deployment choices remain outstanding.
+
 Product behavior for directories, six Stock views, sources, Share, explanation levels and Decision index is specified by the product contracts. Remaining dependencies are fictional identities/timeline and numerical records; approved assessment/scenario methodologies; supporting question/article/filing content; and separately authorized backend/API/AI design and implementation.
 
 The [release exclusions](../product/INTERACTION_CONTRACTS.md#int-018-release-exclusions-and-trust) remain unexposed. No mandatory pagination architecture is selected; reconsider only when final dataset size justifies it. [README requirements handoff](../../README.md#requirements-handoff-before-implementation) records the concise requirements baseline needed before application implementation. This document does not select backend services, schema, storage or API contracts.

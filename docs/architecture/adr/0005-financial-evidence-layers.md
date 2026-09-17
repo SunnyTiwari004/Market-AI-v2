@@ -6,6 +6,8 @@ Accepted in part; scope assumptions superseded by [ADR 0006](0006-synthetic-fina
 
 The body below records the historical 2026-09-04 decision, including its Tata/mock fixtures and real-evidence expectations. **[ADR 0006](0006-synthetic-financial-universe.md) and [SYNTHETIC_DATA_CONTRACT.md](../../data/SYNTHETIC_DATA_CONTRACT.md) own the current dataset strategy.** Historical statements below do not authorize those fixtures or plan future real-source ingestion. Links to the data contract resolve its active successor.
 
+System Design Gate 1 (2026-09-16) specifies the retained separation through [the deterministic methodology](../../research/RESEARCH_METHODOLOGY.md) and [backend validation boundary](../BACKEND_ARCHITECTURE.md#provider-and-validation-boundary). These are design specifications, not executed research or AI completion. The historical body below remains superseded where already noted.
+
 ## Date
 
 2026-09-04

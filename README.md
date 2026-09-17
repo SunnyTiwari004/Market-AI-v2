@@ -38,6 +38,10 @@ Run `pnpm lint` to lint the project and `pnpm build` to create a production buil
 - [Responsive rules](docs/design/RESPONSIVE_RULES.md)
 - [Frontend architecture](docs/architecture/FRONTEND_ARCHITECTURE.md)
 - [Synthetic data contract](docs/data/SYNTHETIC_DATA_CONTRACT.md)
+- [Logical data model](docs/data/DATA_MODEL.md)
+- [Research methodology](docs/research/RESEARCH_METHODOLOGY.md)
+- [Backend architecture](docs/architecture/BACKEND_ARCHITECTURE.md)
+- [Server and API contract](docs/architecture/API_CONTRACT.md)
 - [Frontend acceptance](docs/qa/FRONTEND_ACCEPTANCE.md)
 - [Architecture decision records](docs/architecture/adr/)
 
@@ -46,6 +50,8 @@ Run `pnpm lint` to lint the project and `pnpm build` to create a production buil
 Gate 2.5 audit accepted; the 2026-09-13 contracts record product behavior and explanation depth. The 2026-09-15 [Product Baseline](docs/product/PRD.md) now defines final Release-1 scope and coverage, with [NFRs](docs/product/NON_FUNCTIONAL_REQUIREMENTS.md) and [traceability](docs/product/REQUIREMENT_TRACEABILITY.md). This is specification completion, not implementation readiness. Before application implementation, separately establish fictional identities/timeline, numerical records, approved research methodologies, the synthetic data model, backend/API and AI architecture, and environment-based performance/resource budgets. Existing experience and interaction contracts remain the functional mechanics authority; no large duplicate FSD is needed. No schema, numerical dataset or backend implementation is created in this pass.
 
 The five [required visual references](docs/design/DESIGN_SYSTEM.md#gate-25-reference-handoff) are needed before their relevant frontend implementation. Final Release 1 includes all six Stock views; separately authorized development can proceed through verified vertical slices without exposing unfinished views as completed functionality.
+
+System Design Gate 1 (2026-09-16) now specifies the logical model, deterministic educational research methods, modular backend and browser server interfaces linked above. PostgreSQL/Drizzle are design recommendations, not installed dependencies. Remaining work includes design review, actual fictional identities/calendar/content, physical schema/migrations in an authorized implementation milestone, hosting/provider/resource decisions and the relevant visual references. No records, migrations, APIs or first-slice implementation are created by this gate; the earlier baseline paragraph records that milestone's handoff.
 
 ## Development rules
 

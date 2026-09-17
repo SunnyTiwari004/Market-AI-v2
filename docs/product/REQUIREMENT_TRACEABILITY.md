@@ -91,7 +91,7 @@ Every row is **SPECIFIED** and **IMPLEMENTATION NOT STARTED**. The final column 
 
 Coverage: **12 PRD + 7 EXP + 18 INT + 13 NFR = 50 defined requirements**, each mapped once above. References elsewhere do not create new definitions. EXP/INT IDs and meanings remain unchanged. The six Stock views share the bounded INT-012 definition and are individually scoped in PRD-004; no invented extra EXP/INT IDs are needed.
 
-The five required visual references remain outstanding for their specified frontend areas. The technical documents below now specify logical data, research methods, server boundaries and grounding validation. Actual fictional identities/calendar/content, physical schema implementation, hosting/provider selection and operational budgets remain outstanding. No row claims a populated dataset, executed methodology, implemented interface or permission to implement. PostgreSQL/Drizzle are recorded design recommendations; no cloud or AI vendor is selected.
+The five required visual references remain outstanding for their specified frontend areas. The technical documents below now specify logical data, research methods, server boundaries and grounding validation. Fictional identities/calendar and evidence-content slots are now specified in the Synthetic Universe Design Gate below. Numerical records, actual source bodies, physical schema implementation, hosting/provider selection and operational budgets remain outstanding. No row claims a populated dataset, executed methodology, implemented interface or permission to implement. PostgreSQL/Drizzle are recorded design recommendations; no cloud or AI vendor is selected.
 
 ## System design verification sources
 
@@ -113,3 +113,14 @@ These links supplement the original acceptance sources without copying physical 
 | INT-017, NFR-009 | [Error contract](../architecture/API_CONTRACT.md#shared-contract) | Transport failure distinct from supported missing/empty/partial results. |
 | NFR-001, NFR-011 | [Cache/freshness](../architecture/BACKEND_ARCHITECTURE.md#cache-and-freshness), [resource policy](../architecture/API_CONTRACT.md#resource-and-security-policy) | Version pinning, sanitized diagnostics and later hosting measurements. |
 | NFR-010, NFR-012 | [Method tests](../research/RESEARCH_METHODOLOGY.md#verification-before-implementation-completion), [publication transactions](../architecture/BACKEND_ARCHITECTURE.md#transactions-and-publication) | Reproducible setup, known outputs, rollback and immutable published versions. |
+
+## Synthetic universe verification sources
+
+Synthetic Universe Design Gate, 2026-09-17: these resolve identity, calendar, content-inventory and seed-policy dependencies only. All 50 original requirement definitions and statuses remain valid; implementation is still IMPLEMENTATION NOT STARTED. No generated records or passing implementation tests are claimed.
+
+| Requirements | New specification | Verification handoff |
+| --- | --- | --- |
+| PRD-001, PRD-002, PRD-003, NFR-007, NFR-008, INT-018 | [Universe and fixed timeline](../data/SYNTHETIC_UNIVERSE.md) | Exact issuer/listing/offer overlap, common calendars, eligible evidence and reproducible simulated clock. |
+| PRD-004, PRD-007, INT-006, INT-007, INT-008, INT-010, INT-011, INT-012, INT-014, INT-015 | [Evidence corpus](../data/SYNTHETIC_UNIVERSE.md#evidence-corpus-inventory), [discovery membership](../data/SYNTHETIC_UNIVERSE.md#themes-and-collections), [concepts](../data/SYNTHETIC_UNIVERSE.md#six-concept-records-and-ask-grounding) | Bounded source coverage and identity routing for required views and four Ask capabilities; no actual source bodies or AI calls yet. |
+| PRD-008, EXP-001, EXP-003, EXP-004, INT-013, NFR-010 | [Scenario assumptions](../data/SEED_BLUEPRINT.md#scenario-assumption-blueprint), [historical stories](../data/SYNTHETIC_UNIVERSE.md#what-changed-storylines-and-continuity) | Same future calculation authority across depth/horizon; input intentions never substitute for executed classifications. |
+| PRD-005, PRD-011, PRD-012, NFR-012 | [Publication validation](../data/SEED_BLUEPRINT.md#publication-blocking-validation-contract), [first slice](../data/SEED_BLUEPRINT.md#smallest-future-implementation-slice) | Distinguish blocking integrity/full-release obligations from nonblocking category diversity and explicitly partial development slices; visual prerequisites unchanged. |

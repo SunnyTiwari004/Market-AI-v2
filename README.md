@@ -6,7 +6,7 @@ MARKET AI teaches financial research through a permanently synthetic, fictional 
 
 Current project status: **Product and architecture recovery / specification phase.** The repository foundation and authoritative documentation exist; application product screens, backend, database, research engine, and AI integration are not yet implemented.
 
-The intended application has real frontend/backend implementation, database, APIs, routing, search/filtering, calculations, research engine, historical snapshots, What Changed logic, eventual AI integration, accessibility, testing, CI/CD, and deployment. Each implementation milestone requires explicit authorization. The synthetic dataset is the final project data strategy; commercial market-data licensing/integration is not planned. Fictional company identities and datasets will be defined later; real-company Stitch examples remain design references only.
+The intended application has real frontend/backend implementation, database, APIs, routing, search/filtering, calculations, research engine, historical snapshots, What Changed logic, eventual AI integration, accessibility, testing, CI/CD, and deployment. Each implementation milestone requires explicit authorization. The synthetic dataset is the final project data strategy; commercial market-data licensing/integration is not planned. Fictional identities and chronology are now specified in the synthetic-universe blueprint; numerical datasets remain ungenerated. Real-company Stitch examples remain design references only.
 
 Technology baseline: Next.js App Router, TypeScript, React, Tailwind CSS, and pnpm. [package.json](package.json) and [pnpm-lock.yaml](pnpm-lock.yaml) own dependency versions.
 
@@ -38,6 +38,8 @@ Run `pnpm lint` to lint the project and `pnpm build` to create a production buil
 - [Responsive rules](docs/design/RESPONSIVE_RULES.md)
 - [Frontend architecture](docs/architecture/FRONTEND_ARCHITECTURE.md)
 - [Synthetic data contract](docs/data/SYNTHETIC_DATA_CONTRACT.md)
+- [Synthetic universe](docs/data/SYNTHETIC_UNIVERSE.md)
+- [Deterministic seed blueprint](docs/data/SEED_BLUEPRINT.md)
 - [Logical data model](docs/data/DATA_MODEL.md)
 - [Research methodology](docs/research/RESEARCH_METHODOLOGY.md)
 - [Backend architecture](docs/architecture/BACKEND_ARCHITECTURE.md)
@@ -52,6 +54,8 @@ Gate 2.5 audit accepted; the 2026-09-13 contracts record product behavior and ex
 The five [required visual references](docs/design/DESIGN_SYSTEM.md#gate-25-reference-handoff) are needed before their relevant frontend implementation. Final Release 1 includes all six Stock views; separately authorized development can proceed through verified vertical slices without exposing unfinished views as completed functionality.
 
 System Design Gate 1 (2026-09-16) now specifies the logical model, deterministic educational research methods, modular backend and browser server interfaces linked above. PostgreSQL/Drizzle are design recommendations, not installed dependencies. Remaining work includes design review, actual fictional identities/calendar/content, physical schema/migrations in an authorized implementation milestone, hosting/provider/resource decisions and the relevant visual references. No records, migrations, APIs or first-slice implementation are created by this gate; the earlier baseline paragraph records that milestone's handoff.
+
+Synthetic Universe Design Gate (2026-09-17) defines the 15 fictional issuers, four sectors, fixed 2026-09-30 clock, evidence/content inventory and future seed-validation workflow. The linked blueprint resolves identity/calendar design, not numerical generation or implementation. The methodology remains unchanged; statement values, price paths, source bodies, scenario inputs and all application/database work are still outstanding. Earlier handoff paragraphs record their original milestone boundaries.
 
 ## Development rules
 

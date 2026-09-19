@@ -1,0 +1,2526 @@
+{
+  "id": "e11194be-d799-459c-9c75-351334473f04",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.articles": {
+      "name": "articles",
+      "schema": "",
+      "columns": {
+        "dataset": {
+          "name": "dataset",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "publisher_id": {
+          "name": "publisher_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "body": {
+          "name": "body",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "articles_dataset_dataset_versions_version_fk": {
+          "name": "articles_dataset_dataset_versions_version_fk",
+          "tableFrom": "articles",
+          "tableTo": "dataset_versions",
+          "columnsFrom": [
+            "dataset"
+          ],
+          "columnsTo": [
+            "version"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "articles_dataset_id_evidence_records_dataset_id_fk": {
+          "name": "articles_dataset_id_evidence_records_dataset_id_fk",
+          "tableFrom": "articles",
+          "tableTo": "evidence_records",
+          "columnsFrom": [
+            "dataset",
+            "id"
+          ],
+          "columnsTo": [
+            "dataset",
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "articles_dataset_publisher_id_publishers_dataset_id_fk": {
+          "name": "articles_dataset_publisher_id_publishers_dataset_id_fk",
+          "tableFrom": "articles",
+          "tableTo": "publishers",
+          "columnsFrom": [
+            "dataset",
+            "publisher_id"
+          ],
+          "columnsTo": [
+            "dataset",
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "articles_dataset_id_pk": {
+          "name": "articles_dataset_id_pk",
+          "columns": [
+            "dataset",
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {
+        "article_body": {
+          "name": "article_body",
+          "value": "length(\"articles\".\"body\") > 0"
+        }
+      },
+      "isRLSEnabled": false
+    },
+    "public.assumption_evidence": {
+      "name": "assumption_evidence",
+      "schema": "",
+      "columns": {
+        "dataset": {
+          "name": "dataset",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "case_id": {
+          "name": "case_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "evidence_id": {
+          "name": "evidence_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "assumption_evidence_dataset_case_id_scenario_cases_dataset_id_fk": {
+          "name": "assumption_evidence_dataset_case_id_scenario_cases_dataset_id_fk",
+          "tableFrom": "assumption_evidence",
+          "tableTo": "scenario_cases",
+          "columnsFrom": [
+            "dataset",
+            "case_id"
+          ],
+          "columnsTo": [
+            "dataset",
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "assumption_evidence_dataset_evidence_id_evidence_records_dataset_id_fk": {
+          "name": "assumption_evidence_dataset_evidence_id_evidence_records_dataset_id_fk",
+          "tableFrom": "assumption_evidence",
+          "tableTo": "evidence_records",
+          "columnsFrom": [
+            "dataset",
+            "evidence_id"
+          ],
+          "columnsTo": [
+            "dataset",
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "assumption_evidence_dataset_case_id_evidence_id_pk": {
+          "name": "assumption_evidence_dataset_case_id_evidence_id_pk",
+          "columns": [
+            "dataset",
+            "case_id",
+            "evidence_id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.scenario_assumptions": {
+      "name": "scenario_assumptions",
+      "schema": "",
+      "columns": {
+        "dataset": {
+          "name": "dataset",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "listing_id": {
+          "name": "listing_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "cutoff": {
+          "name": "cutoff",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "method": {
+          "name": "method",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "days": {
+          "name": "days",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "scenario_assumptions_dataset_dataset_versions_version_fk": {
+          "name": "scenario_assumptions_dataset_dataset_versions_version_fk",
+          "tableFrom": "scenario_assumptions",
+          "tableTo": "dataset_versions",
+          "columnsFrom": [
+            "dataset"
+          ],
+          "columnsTo": [
+            "version"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "scenario_assumptions_method_method_definitions_version_fk": {
+          "name": "scenario_assumptions_method_method_definitions_version_fk",
+          "tableFrom": "scenario_assumptions",
+          "tableTo": "method_definitions",
+          "columnsFrom": [
+            "method"
+          ],
+          "columnsTo": [
+            "version"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "scenario_assumptions_dataset_listing_id_listings_dataset_id_fk": {
+          "name": "scenario_assumptions_dataset_listing_id_listings_dataset_id_fk",
+          "tableFrom": "scenario_assumptions",
+          "tableTo": "listings",
+          "columnsFrom": [
+            "dataset",
+            "listing_id"
+          ],
+          "columnsTo": [
+            "dataset",
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "scenario_assumptions_dataset_id_pk": {
+          "name": "scenario_assumptions_dataset_id_pk",
+          "columns": [
+            "dataset",
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {
+        "scenario_assumptions_dataset_listing_id_cutoff_method_unique": {
+          "name": "scenario_assumptions_dataset_listing_id_cutoff_method_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "dataset",
+            "listing_id",
+            "cutoff",
+            "method"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {
+        "stock_scenario_window": {
+          "name": "stock_scenario_window",
+          "value": "\"scenario_assumptions\".\"days\" = 30"
+        }
+      },
+      "isRLSEnabled": false
+    },
+    "public.balance_sheets": {
+      "name": "balance_sheets",
+      "schema": "",
+      "columns": {
+        "dataset": {
+          "name": "dataset",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "assets": {
+          "name": "assets",
+          "type": "numeric(22, 2)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "liabilities": {
+          "name": "liabilities",
+          "type": "numeric(22, 2)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "equity": {
+          "name": "equity",
+          "type": "numeric(22, 2)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "debt": {
+          "name": "debt",
+          "type": "numeric(22, 2)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "cash": {
+          "name": "cash",
+          "type": "numeric(22, 2)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "shares": {
+          "name": "shares",
+          "type": "numeric(20, 0)",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "balance_sheets_dataset_dataset_versions_version_fk": {
+          "name": "balance_sheets_dataset_dataset_versions_version_fk",
+          "tableFrom": "balance_sheets",
+          "tableTo": "dataset_versions",
+          "columnsFrom": [
+            "dataset"
+          ],
+          "columnsTo": [
+            "version"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "balance_sheets_dataset_id_financial_periods_dataset_id_fk": {
+          "name": "balance_sheets_dataset_id_financial_periods_dataset_id_fk",
+          "tableFrom": "balance_sheets",
+          "tableTo": "financial_periods",
+          "columnsFrom": [
+            "dataset",
+            "id"
+          ],
+          "columnsTo": [
+            "dataset",
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "balance_sheets_dataset_id_pk": {
+          "name": "balance_sheets_dataset_id_pk",
+          "columns": [
+            "dataset",
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {
+        "balance_reconciliation": {
+          "name": "balance_reconciliation",
+          "value": "\"balance_sheets\".\"assets\" = \"balance_sheets\".\"liabilities\" + \"balance_sheets\".\"equity\" and \"balance_sheets\".\"assets\" >= 0 and \"balance_sheets\".\"liabilities\" >= 0 and \"balance_sheets\".\"debt\" >= 0 and \"balance_sheets\".\"debt\" <= \"balance_sheets\".\"liabilities\" and \"balance_sheets\".\"cash\" >= 0 and \"balance_sheets\".\"cash\" <= \"balance_sheets\".\"assets\" and \"balance_sheets\".\"shares\" > 0"
+        }
+      },
+      "isRLSEnabled": false
+    },
+    "public.scenario_cases": {
+      "name": "scenario_cases",
+      "schema": "",
+      "columns": {
+        "dataset": {
+          "name": "dataset",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "assumption_id": {
+          "name": "assumption_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "label": {
+          "name": "label",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "g": {
+          "name": "g",
+          "type": "numeric(32, 12)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "m": {
+          "name": "m",
+          "type": "numeric(32, 12)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "rationale": {
+          "name": "rationale",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "scenario_cases_dataset_dataset_versions_version_fk": {
+          "name": "scenario_cases_dataset_dataset_versions_version_fk",
+          "tableFrom": "scenario_cases",
+          "tableTo": "dataset_versions",
+          "columnsFrom": [
+            "dataset"
+          ],
+          "columnsTo": [
+            "version"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "scenario_cases_dataset_assumption_id_scenario_assumptions_dataset_id_fk": {
+          "name": "scenario_cases_dataset_assumption_id_scenario_assumptions_dataset_id_fk",
+          "tableFrom": "scenario_cases",
+          "tableTo": "scenario_assumptions",
+          "columnsFrom": [
+            "dataset",
+            "assumption_id"
+          ],
+          "columnsTo": [
+            "dataset",
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "scenario_cases_dataset_id_pk": {
+          "name": "scenario_cases_dataset_id_pk",
+          "columns": [
+            "dataset",
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {
+        "scenario_cases_dataset_assumption_id_label_unique": {
+          "name": "scenario_cases_dataset_assumption_id_label_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "dataset",
+            "assumption_id",
+            "label"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {
+        "case_domain": {
+          "name": "case_domain",
+          "value": "\"scenario_cases\".\"g\" > -1 and \"scenario_cases\".\"m\" > 0 and \"scenario_cases\".\"label\" in ('Weak','Base','Strong')"
+        }
+      },
+      "isRLSEnabled": false
+    },
+    "public.cash_flow_statements": {
+      "name": "cash_flow_statements",
+      "schema": "",
+      "columns": {
+        "dataset": {
+          "name": "dataset",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "ocf": {
+          "name": "ocf",
+          "type": "numeric(22, 2)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "investing": {
+          "name": "investing",
+          "type": "numeric(22, 2)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "financing": {
+          "name": "financing",
+          "type": "numeric(22, 2)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "capex": {
+          "name": "capex",
+          "type": "numeric(22, 2)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "opening_cash": {
+          "name": "opening_cash",
+          "type": "numeric(22, 2)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "closing_cash": {
+          "name": "closing_cash",
+          "type": "numeric(22, 2)",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "cash_flow_statements_dataset_dataset_versions_version_fk": {
+          "name": "cash_flow_statements_dataset_dataset_versions_version_fk",
+          "tableFrom": "cash_flow_statements",
+          "tableTo": "dataset_versions",
+          "columnsFrom": [
+            "dataset"
+          ],
+          "columnsTo": [
+            "version"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "cash_flow_statements_dataset_id_financial_periods_dataset_id_fk": {
+          "name": "cash_flow_statements_dataset_id_financial_periods_dataset_id_fk",
+          "tableFrom": "cash_flow_statements",
+          "tableTo": "financial_periods",
+          "columnsFrom": [
+            "dataset",
+            "id"
+          ],
+          "columnsTo": [
+            "dataset",
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "cash_flow_statements_dataset_id_pk": {
+          "name": "cash_flow_statements_dataset_id_pk",
+          "columns": [
+            "dataset",
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {
+        "cash_reconciliation": {
+          "name": "cash_reconciliation",
+          "value": "\"cash_flow_statements\".\"opening_cash\" + \"cash_flow_statements\".\"ocf\" + \"cash_flow_statements\".\"investing\" + \"cash_flow_statements\".\"financing\" = \"cash_flow_statements\".\"closing_cash\" and \"cash_flow_statements\".\"capex\" >= 0 and \"cash_flow_statements\".\"opening_cash\" >= 0 and \"cash_flow_statements\".\"closing_cash\" >= 0"
+        }
+      },
+      "isRLSEnabled": false
+    },
+    "public.dataset_versions": {
+      "name": "dataset_versions",
+      "schema": "",
+      "columns": {
+        "version": {
+          "name": "version",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "method": {
+          "name": "method",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "generator": {
+          "name": "generator",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "seed": {
+          "name": "seed",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "reference_at": {
+          "name": "reference_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "calendar": {
+          "name": "calendar",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "fiscal": {
+          "name": "fiscal",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "digest": {
+          "name": "digest",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "published": {
+          "name": "published",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
+        },
+        "profile": {
+          "name": "profile",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "dataset_versions_method_method_definitions_version_fk": {
+          "name": "dataset_versions_method_method_definitions_version_fk",
+          "tableFrom": "dataset_versions",
+          "tableTo": "method_definitions",
+          "columnsFrom": [
+            "method"
+          ],
+          "columnsTo": [
+            "version"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {
+        "development_profile": {
+          "name": "development_profile",
+          "value": "\"dataset_versions\".\"profile\" = 'three-company-development-slice'"
+        }
+      },
+      "isRLSEnabled": false
+    },
+    "public.source_documents": {
+      "name": "source_documents",
+      "schema": "",
+      "columns": {
+        "dataset": {
+          "name": "dataset",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "issuer_id": {
+          "name": "issuer_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "document_type": {
+          "name": "document_type",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "body": {
+          "name": "body",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "publisher": {
+          "name": "publisher",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "source_documents_dataset_dataset_versions_version_fk": {
+          "name": "source_documents_dataset_dataset_versions_version_fk",
+          "tableFrom": "source_documents",
+          "tableTo": "dataset_versions",
+          "columnsFrom": [
+            "dataset"
+          ],
+          "columnsTo": [
+            "version"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "source_documents_dataset_id_evidence_records_dataset_id_fk": {
+          "name": "source_documents_dataset_id_evidence_records_dataset_id_fk",
+          "tableFrom": "source_documents",
+          "tableTo": "evidence_records",
+          "columnsFrom": [
+            "dataset",
+            "id"
+          ],
+          "columnsTo": [
+            "dataset",
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "source_documents_dataset_issuer_id_issuers_dataset_id_fk": {
+          "name": "source_documents_dataset_issuer_id_issuers_dataset_id_fk",
+          "tableFrom": "source_documents",
+          "tableTo": "issuers",
+          "columnsFrom": [
+            "dataset",
+            "issuer_id"
+          ],
+          "columnsTo": [
+            "dataset",
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "source_documents_dataset_id_pk": {
+          "name": "source_documents_dataset_id_pk",
+          "columns": [
+            "dataset",
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {
+        "document_body": {
+          "name": "document_body",
+          "value": "length(\"source_documents\".\"body\") > 0"
+        },
+        "document_type": {
+          "name": "document_type",
+          "value": "\"source_documents\".\"document_type\" in ('annual','quarterly','announcement')"
+        }
+      },
+      "isRLSEnabled": false
+    },
+    "public.evidence_records": {
+      "name": "evidence_records",
+      "schema": "",
+      "columns": {
+        "dataset": {
+          "name": "dataset",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "kind": {
+          "name": "kind",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "title": {
+          "name": "title",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "published_at": {
+          "name": "published_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "simulated": {
+          "name": "simulated",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "digest": {
+          "name": "digest",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "evidence_records_dataset_dataset_versions_version_fk": {
+          "name": "evidence_records_dataset_dataset_versions_version_fk",
+          "tableFrom": "evidence_records",
+          "tableTo": "dataset_versions",
+          "columnsFrom": [
+            "dataset"
+          ],
+          "columnsTo": [
+            "version"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "evidence_records_dataset_id_pk": {
+          "name": "evidence_records_dataset_id_pk",
+          "columns": [
+            "dataset",
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {
+        "simulated_evidence": {
+          "name": "simulated_evidence",
+          "value": "\"evidence_records\".\"simulated\" = true"
+        },
+        "evidence_kind": {
+          "name": "evidence_kind",
+          "value": "\"evidence_records\".\"kind\" in ('document','article')"
+        }
+      },
+      "isRLSEnabled": false
+    },
+    "public.evidence_issuers": {
+      "name": "evidence_issuers",
+      "schema": "",
+      "columns": {
+        "dataset": {
+          "name": "dataset",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "evidence_id": {
+          "name": "evidence_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "issuer_id": {
+          "name": "issuer_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "evidence_issuers_dataset_evidence_id_evidence_records_dataset_id_fk": {
+          "name": "evidence_issuers_dataset_evidence_id_evidence_records_dataset_id_fk",
+          "tableFrom": "evidence_issuers",
+          "tableTo": "evidence_records",
+          "columnsFrom": [
+            "dataset",
+            "evidence_id"
+          ],
+          "columnsTo": [
+            "dataset",
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "evidence_issuers_dataset_issuer_id_issuers_dataset_id_fk": {
+          "name": "evidence_issuers_dataset_issuer_id_issuers_dataset_id_fk",
+          "tableFrom": "evidence_issuers",
+          "tableTo": "issuers",
+          "columnsFrom": [
+            "dataset",
+            "issuer_id"
+          ],
+          "columnsTo": [
+            "dataset",
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "evidence_issuers_dataset_evidence_id_issuer_id_pk": {
+          "name": "evidence_issuers_dataset_evidence_id_issuer_id_pk",
+          "columns": [
+            "dataset",
+            "evidence_id",
+            "issuer_id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.finding_evidence": {
+      "name": "finding_evidence",
+      "schema": "",
+      "columns": {
+        "dataset": {
+          "name": "dataset",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "finding_id": {
+          "name": "finding_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "evidence_id": {
+          "name": "evidence_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "finding_evidence_dataset_finding_id_research_findings_dataset_id_fk": {
+          "name": "finding_evidence_dataset_finding_id_research_findings_dataset_id_fk",
+          "tableFrom": "finding_evidence",
+          "tableTo": "research_findings",
+          "columnsFrom": [
+            "dataset",
+            "finding_id"
+          ],
+          "columnsTo": [
+            "dataset",
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "finding_evidence_dataset_evidence_id_evidence_records_dataset_id_fk": {
+          "name": "finding_evidence_dataset_evidence_id_evidence_records_dataset_id_fk",
+          "tableFrom": "finding_evidence",
+          "tableTo": "evidence_records",
+          "columnsFrom": [
+            "dataset",
+            "evidence_id"
+          ],
+          "columnsTo": [
+            "dataset",
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "finding_evidence_dataset_finding_id_evidence_id_pk": {
+          "name": "finding_evidence_dataset_finding_id_evidence_id_pk",
+          "columns": [
+            "dataset",
+            "finding_id",
+            "evidence_id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.research_findings": {
+      "name": "research_findings",
+      "schema": "",
+      "columns": {
+        "dataset": {
+          "name": "dataset",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "snapshot_id": {
+          "name": "snapshot_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "rule_key": {
+          "name": "rule_key",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "field": {
+          "name": "field",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "kind": {
+          "name": "kind",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "research_findings_dataset_dataset_versions_version_fk": {
+          "name": "research_findings_dataset_dataset_versions_version_fk",
+          "tableFrom": "research_findings",
+          "tableTo": "dataset_versions",
+          "columnsFrom": [
+            "dataset"
+          ],
+          "columnsTo": [
+            "version"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "research_findings_dataset_snapshot_id_stock_snapshots_dataset_id_fk": {
+          "name": "research_findings_dataset_snapshot_id_stock_snapshots_dataset_id_fk",
+          "tableFrom": "research_findings",
+          "tableTo": "stock_snapshots",
+          "columnsFrom": [
+            "dataset",
+            "snapshot_id"
+          ],
+          "columnsTo": [
+            "dataset",
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "research_findings_dataset_id_pk": {
+          "name": "research_findings_dataset_id_pk",
+          "columns": [
+            "dataset",
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {
+        "research_findings_dataset_snapshot_id_rule_key_unique": {
+          "name": "research_findings_dataset_snapshot_id_rule_key_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "dataset",
+            "snapshot_id",
+            "rule_key"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {
+        "finding_values": {
+          "name": "finding_values",
+          "value": "\"research_findings\".\"field\" in ('business','growth','financial') and \"research_findings\".\"kind\" in ('positive','caution','neutral')"
+        }
+      },
+      "isRLSEnabled": false
+    },
+    "public.income_statements": {
+      "name": "income_statements",
+      "schema": "",
+      "columns": {
+        "dataset": {
+          "name": "dataset",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "revenue": {
+          "name": "revenue",
+          "type": "numeric(22, 2)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "ebit": {
+          "name": "ebit",
+          "type": "numeric(22, 2)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "interest": {
+          "name": "interest",
+          "type": "numeric(22, 2)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "income": {
+          "name": "income",
+          "type": "numeric(22, 2)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "weighted_shares": {
+          "name": "weighted_shares",
+          "type": "numeric(26, 6)",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "income_statements_dataset_dataset_versions_version_fk": {
+          "name": "income_statements_dataset_dataset_versions_version_fk",
+          "tableFrom": "income_statements",
+          "tableTo": "dataset_versions",
+          "columnsFrom": [
+            "dataset"
+          ],
+          "columnsTo": [
+            "version"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "income_statements_dataset_id_financial_periods_dataset_id_fk": {
+          "name": "income_statements_dataset_id_financial_periods_dataset_id_fk",
+          "tableFrom": "income_statements",
+          "tableTo": "financial_periods",
+          "columnsFrom": [
+            "dataset",
+            "id"
+          ],
+          "columnsTo": [
+            "dataset",
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "income_statements_dataset_id_pk": {
+          "name": "income_statements_dataset_id_pk",
+          "columns": [
+            "dataset",
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {
+        "income_inputs": {
+          "name": "income_inputs",
+          "value": "\"income_statements\".\"revenue\" >= 0 and \"income_statements\".\"interest\" >= 0 and \"income_statements\".\"weighted_shares\" > 0"
+        }
+      },
+      "isRLSEnabled": false
+    },
+    "public.issuers": {
+      "name": "issuers",
+      "schema": "",
+      "columns": {
+        "dataset": {
+          "name": "dataset",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "sector_id": {
+          "name": "sector_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "registry_key": {
+          "name": "registry_key",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "slug": {
+          "name": "slug",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "description": {
+          "name": "description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "issuers_dataset_dataset_versions_version_fk": {
+          "name": "issuers_dataset_dataset_versions_version_fk",
+          "tableFrom": "issuers",
+          "tableTo": "dataset_versions",
+          "columnsFrom": [
+            "dataset"
+          ],
+          "columnsTo": [
+            "version"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "issuers_dataset_sector_id_sectors_dataset_id_fk": {
+          "name": "issuers_dataset_sector_id_sectors_dataset_id_fk",
+          "tableFrom": "issuers",
+          "tableTo": "sectors",
+          "columnsFrom": [
+            "dataset",
+            "sector_id"
+          ],
+          "columnsTo": [
+            "dataset",
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "issuers_dataset_id_pk": {
+          "name": "issuers_dataset_id_pk",
+          "columns": [
+            "dataset",
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {
+        "issuers_dataset_slug_unique": {
+          "name": "issuers_dataset_slug_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "dataset",
+            "slug"
+          ]
+        },
+        "issuers_dataset_registry_key_unique": {
+          "name": "issuers_dataset_registry_key_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "dataset",
+            "registry_key"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.listings": {
+      "name": "listings",
+      "schema": "",
+      "columns": {
+        "dataset": {
+          "name": "dataset",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "issuer_id": {
+          "name": "issuer_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "symbol": {
+          "name": "symbol",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "listed_at": {
+          "name": "listed_at",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "venue": {
+          "name": "venue",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'Market AI Simulated Market'"
+        },
+        "currency": {
+          "name": "currency",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'INR'"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "listings_dataset_dataset_versions_version_fk": {
+          "name": "listings_dataset_dataset_versions_version_fk",
+          "tableFrom": "listings",
+          "tableTo": "dataset_versions",
+          "columnsFrom": [
+            "dataset"
+          ],
+          "columnsTo": [
+            "version"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "listings_dataset_issuer_id_issuers_dataset_id_fk": {
+          "name": "listings_dataset_issuer_id_issuers_dataset_id_fk",
+          "tableFrom": "listings",
+          "tableTo": "issuers",
+          "columnsFrom": [
+            "dataset",
+            "issuer_id"
+          ],
+          "columnsTo": [
+            "dataset",
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "listings_dataset_id_pk": {
+          "name": "listings_dataset_id_pk",
+          "columns": [
+            "dataset",
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {
+        "listings_dataset_symbol_unique": {
+          "name": "listings_dataset_symbol_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "dataset",
+            "symbol"
+          ]
+        },
+        "listings_dataset_issuer_id_unique": {
+          "name": "listings_dataset_issuer_id_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "dataset",
+            "issuer_id"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {
+        "symbol_format": {
+          "name": "symbol_format",
+          "value": "\"listings\".\"symbol\" ~ '^[A-Z]{3,8}$'"
+        },
+        "listing_currency": {
+          "name": "listing_currency",
+          "value": "\"listings\".\"currency\" = 'INR'"
+        }
+      },
+      "isRLSEnabled": false
+    },
+    "public.method_definitions": {
+      "name": "method_definitions",
+      "schema": "",
+      "columns": {
+        "version": {
+          "name": "version",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "specification_digest": {
+          "name": "specification_digest",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "implementation_digest": {
+          "name": "implementation_digest",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.financial_periods": {
+      "name": "financial_periods",
+      "schema": "",
+      "columns": {
+        "dataset": {
+          "name": "dataset",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "issuer_id": {
+          "name": "issuer_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "source_id": {
+          "name": "source_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "basis": {
+          "name": "basis",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "start": {
+          "name": "start",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "end": {
+          "name": "end",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "published_at": {
+          "name": "published_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "currency": {
+          "name": "currency",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "scope": {
+          "name": "scope",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "financial_periods_dataset_dataset_versions_version_fk": {
+          "name": "financial_periods_dataset_dataset_versions_version_fk",
+          "tableFrom": "financial_periods",
+          "tableTo": "dataset_versions",
+          "columnsFrom": [
+            "dataset"
+          ],
+          "columnsTo": [
+            "version"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "financial_periods_dataset_issuer_id_issuers_dataset_id_fk": {
+          "name": "financial_periods_dataset_issuer_id_issuers_dataset_id_fk",
+          "tableFrom": "financial_periods",
+          "tableTo": "issuers",
+          "columnsFrom": [
+            "dataset",
+            "issuer_id"
+          ],
+          "columnsTo": [
+            "dataset",
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "financial_periods_dataset_source_id_source_documents_dataset_id_fk": {
+          "name": "financial_periods_dataset_source_id_source_documents_dataset_id_fk",
+          "tableFrom": "financial_periods",
+          "tableTo": "source_documents",
+          "columnsFrom": [
+            "dataset",
+            "source_id"
+          ],
+          "columnsTo": [
+            "dataset",
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "financial_periods_dataset_id_pk": {
+          "name": "financial_periods_dataset_id_pk",
+          "columns": [
+            "dataset",
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {
+        "financial_periods_dataset_issuer_id_basis_start_end_unique": {
+          "name": "financial_periods_dataset_issuer_id_basis_start_end_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "dataset",
+            "issuer_id",
+            "basis",
+            "start",
+            "end"
+          ]
+        },
+        "financial_periods_dataset_source_id_unique": {
+          "name": "financial_periods_dataset_source_id_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "dataset",
+            "source_id"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {
+        "period_chronology": {
+          "name": "period_chronology",
+          "value": "\"financial_periods\".\"start\" <= \"financial_periods\".\"end\" and \"financial_periods\".\"published_at\" > \"financial_periods\".\"end\"::timestamp at time zone 'Asia/Kolkata'"
+        },
+        "period_basis": {
+          "name": "period_basis",
+          "value": "\"financial_periods\".\"basis\" in ('annual','quarterly') and \"financial_periods\".\"currency\" = 'INR' and \"financial_periods\".\"scope\" = 'standalone'"
+        }
+      },
+      "isRLSEnabled": false
+    },
+    "public.price_closes": {
+      "name": "price_closes",
+      "schema": "",
+      "columns": {
+        "dataset": {
+          "name": "dataset",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "listing_id": {
+          "name": "listing_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "date": {
+          "name": "date",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "close": {
+          "name": "close",
+          "type": "numeric(22, 2)",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "price_closes_dataset_dataset_versions_version_fk": {
+          "name": "price_closes_dataset_dataset_versions_version_fk",
+          "tableFrom": "price_closes",
+          "tableTo": "dataset_versions",
+          "columnsFrom": [
+            "dataset"
+          ],
+          "columnsTo": [
+            "version"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "price_closes_dataset_listing_id_listings_dataset_id_fk": {
+          "name": "price_closes_dataset_listing_id_listings_dataset_id_fk",
+          "tableFrom": "price_closes",
+          "tableTo": "listings",
+          "columnsFrom": [
+            "dataset",
+            "listing_id"
+          ],
+          "columnsTo": [
+            "dataset",
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "price_closes_dataset_date_trading_sessions_dataset_date_fk": {
+          "name": "price_closes_dataset_date_trading_sessions_dataset_date_fk",
+          "tableFrom": "price_closes",
+          "tableTo": "trading_sessions",
+          "columnsFrom": [
+            "dataset",
+            "date"
+          ],
+          "columnsTo": [
+            "dataset",
+            "date"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "price_closes_dataset_id_pk": {
+          "name": "price_closes_dataset_id_pk",
+          "columns": [
+            "dataset",
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {
+        "price_closes_dataset_listing_id_date_unique": {
+          "name": "price_closes_dataset_listing_id_date_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "dataset",
+            "listing_id",
+            "date"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {
+        "positive_close": {
+          "name": "positive_close",
+          "value": "\"price_closes\".\"close\" > 0"
+        }
+      },
+      "isRLSEnabled": false
+    },
+    "public.publishers": {
+      "name": "publishers",
+      "schema": "",
+      "columns": {
+        "dataset": {
+          "name": "dataset",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "publishers_dataset_dataset_versions_version_fk": {
+          "name": "publishers_dataset_dataset_versions_version_fk",
+          "tableFrom": "publishers",
+          "tableTo": "dataset_versions",
+          "columnsFrom": [
+            "dataset"
+          ],
+          "columnsTo": [
+            "version"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "publishers_dataset_id_pk": {
+          "name": "publishers_dataset_id_pk",
+          "columns": [
+            "dataset",
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {
+        "publishers_dataset_name_unique": {
+          "name": "publishers_dataset_name_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "dataset",
+            "name"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.scenario_sets": {
+      "name": "scenario_sets",
+      "schema": "",
+      "columns": {
+        "dataset": {
+          "name": "dataset",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "assumption_id": {
+          "name": "assumption_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "listing_id": {
+          "name": "listing_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "cutoff": {
+          "name": "cutoff",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "output": {
+          "name": "output",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "scenario_sets_dataset_dataset_versions_version_fk": {
+          "name": "scenario_sets_dataset_dataset_versions_version_fk",
+          "tableFrom": "scenario_sets",
+          "tableTo": "dataset_versions",
+          "columnsFrom": [
+            "dataset"
+          ],
+          "columnsTo": [
+            "version"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "scenario_sets_dataset_assumption_id_scenario_assumptions_dataset_id_fk": {
+          "name": "scenario_sets_dataset_assumption_id_scenario_assumptions_dataset_id_fk",
+          "tableFrom": "scenario_sets",
+          "tableTo": "scenario_assumptions",
+          "columnsFrom": [
+            "dataset",
+            "assumption_id"
+          ],
+          "columnsTo": [
+            "dataset",
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "scenario_sets_dataset_listing_id_listings_dataset_id_fk": {
+          "name": "scenario_sets_dataset_listing_id_listings_dataset_id_fk",
+          "tableFrom": "scenario_sets",
+          "tableTo": "listings",
+          "columnsFrom": [
+            "dataset",
+            "listing_id"
+          ],
+          "columnsTo": [
+            "dataset",
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "scenario_sets_dataset_id_pk": {
+          "name": "scenario_sets_dataset_id_pk",
+          "columns": [
+            "dataset",
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {
+        "scenario_sets_dataset_assumption_id_unique": {
+          "name": "scenario_sets_dataset_assumption_id_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "dataset",
+            "assumption_id"
+          ]
+        },
+        "scenario_sets_dataset_listing_id_cutoff_unique": {
+          "name": "scenario_sets_dataset_listing_id_cutoff_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "dataset",
+            "listing_id",
+            "cutoff"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.sectors": {
+      "name": "sectors",
+      "schema": "",
+      "columns": {
+        "dataset": {
+          "name": "dataset",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "slug": {
+          "name": "slug",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "sectors_dataset_dataset_versions_version_fk": {
+          "name": "sectors_dataset_dataset_versions_version_fk",
+          "tableFrom": "sectors",
+          "tableTo": "dataset_versions",
+          "columnsFrom": [
+            "dataset"
+          ],
+          "columnsTo": [
+            "version"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "sectors_dataset_id_pk": {
+          "name": "sectors_dataset_id_pk",
+          "columns": [
+            "dataset",
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {
+        "sectors_dataset_slug_unique": {
+          "name": "sectors_dataset_slug_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "dataset",
+            "slug"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.snapshot_evidence": {
+      "name": "snapshot_evidence",
+      "schema": "",
+      "columns": {
+        "dataset": {
+          "name": "dataset",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "snapshot_id": {
+          "name": "snapshot_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "evidence_id": {
+          "name": "evidence_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "snapshot_evidence_dataset_snapshot_id_stock_snapshots_dataset_id_fk": {
+          "name": "snapshot_evidence_dataset_snapshot_id_stock_snapshots_dataset_id_fk",
+          "tableFrom": "snapshot_evidence",
+          "tableTo": "stock_snapshots",
+          "columnsFrom": [
+            "dataset",
+            "snapshot_id"
+          ],
+          "columnsTo": [
+            "dataset",
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "snapshot_evidence_dataset_evidence_id_evidence_records_dataset_id_fk": {
+          "name": "snapshot_evidence_dataset_evidence_id_evidence_records_dataset_id_fk",
+          "tableFrom": "snapshot_evidence",
+          "tableTo": "evidence_records",
+          "columnsFrom": [
+            "dataset",
+            "evidence_id"
+          ],
+          "columnsTo": [
+            "dataset",
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "snapshot_evidence_dataset_snapshot_id_evidence_id_pk": {
+          "name": "snapshot_evidence_dataset_snapshot_id_evidence_id_pk",
+          "columns": [
+            "dataset",
+            "snapshot_id",
+            "evidence_id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.snapshot_financial_inputs": {
+      "name": "snapshot_financial_inputs",
+      "schema": "",
+      "columns": {
+        "dataset": {
+          "name": "dataset",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "snapshot_id": {
+          "name": "snapshot_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "period_id": {
+          "name": "period_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "snapshot_financial_inputs_dataset_snapshot_id_stock_snapshots_dataset_id_fk": {
+          "name": "snapshot_financial_inputs_dataset_snapshot_id_stock_snapshots_dataset_id_fk",
+          "tableFrom": "snapshot_financial_inputs",
+          "tableTo": "stock_snapshots",
+          "columnsFrom": [
+            "dataset",
+            "snapshot_id"
+          ],
+          "columnsTo": [
+            "dataset",
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "snapshot_financial_inputs_dataset_period_id_financial_periods_dataset_id_fk": {
+          "name": "snapshot_financial_inputs_dataset_period_id_financial_periods_dataset_id_fk",
+          "tableFrom": "snapshot_financial_inputs",
+          "tableTo": "financial_periods",
+          "columnsFrom": [
+            "dataset",
+            "period_id"
+          ],
+          "columnsTo": [
+            "dataset",
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "snapshot_financial_inputs_dataset_snapshot_id_period_id_pk": {
+          "name": "snapshot_financial_inputs_dataset_snapshot_id_period_id_pk",
+          "columns": [
+            "dataset",
+            "snapshot_id",
+            "period_id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.snapshot_peer_inputs": {
+      "name": "snapshot_peer_inputs",
+      "schema": "",
+      "columns": {
+        "dataset": {
+          "name": "dataset",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "snapshot_id": {
+          "name": "snapshot_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "listing_id": {
+          "name": "listing_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "snapshot_peer_inputs_dataset_snapshot_id_stock_snapshots_dataset_id_fk": {
+          "name": "snapshot_peer_inputs_dataset_snapshot_id_stock_snapshots_dataset_id_fk",
+          "tableFrom": "snapshot_peer_inputs",
+          "tableTo": "stock_snapshots",
+          "columnsFrom": [
+            "dataset",
+            "snapshot_id"
+          ],
+          "columnsTo": [
+            "dataset",
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "snapshot_peer_inputs_dataset_listing_id_listings_dataset_id_fk": {
+          "name": "snapshot_peer_inputs_dataset_listing_id_listings_dataset_id_fk",
+          "tableFrom": "snapshot_peer_inputs",
+          "tableTo": "listings",
+          "columnsFrom": [
+            "dataset",
+            "listing_id"
+          ],
+          "columnsTo": [
+            "dataset",
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "snapshot_peer_inputs_dataset_snapshot_id_listing_id_pk": {
+          "name": "snapshot_peer_inputs_dataset_snapshot_id_listing_id_pk",
+          "columns": [
+            "dataset",
+            "snapshot_id",
+            "listing_id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.snapshot_price_inputs": {
+      "name": "snapshot_price_inputs",
+      "schema": "",
+      "columns": {
+        "dataset": {
+          "name": "dataset",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "snapshot_id": {
+          "name": "snapshot_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "price_id": {
+          "name": "price_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "snapshot_price_inputs_dataset_snapshot_id_stock_snapshots_dataset_id_fk": {
+          "name": "snapshot_price_inputs_dataset_snapshot_id_stock_snapshots_dataset_id_fk",
+          "tableFrom": "snapshot_price_inputs",
+          "tableTo": "stock_snapshots",
+          "columnsFrom": [
+            "dataset",
+            "snapshot_id"
+          ],
+          "columnsTo": [
+            "dataset",
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "snapshot_price_inputs_dataset_price_id_price_closes_dataset_id_fk": {
+          "name": "snapshot_price_inputs_dataset_price_id_price_closes_dataset_id_fk",
+          "tableFrom": "snapshot_price_inputs",
+          "tableTo": "price_closes",
+          "columnsFrom": [
+            "dataset",
+            "price_id"
+          ],
+          "columnsTo": [
+            "dataset",
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "snapshot_price_inputs_dataset_snapshot_id_price_id_pk": {
+          "name": "snapshot_price_inputs_dataset_snapshot_id_price_id_pk",
+          "columns": [
+            "dataset",
+            "snapshot_id",
+            "price_id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.stock_snapshots": {
+      "name": "stock_snapshots",
+      "schema": "",
+      "columns": {
+        "dataset": {
+          "name": "dataset",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "listing_id": {
+          "name": "listing_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "cutoff": {
+          "name": "cutoff",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "session": {
+          "name": "session",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "horizon": {
+          "name": "horizon",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "method": {
+          "name": "method",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "scenario_id": {
+          "name": "scenario_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "output": {
+          "name": "output",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "digest": {
+          "name": "digest",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "stock_snapshots_dataset_dataset_versions_version_fk": {
+          "name": "stock_snapshots_dataset_dataset_versions_version_fk",
+          "tableFrom": "stock_snapshots",
+          "tableTo": "dataset_versions",
+          "columnsFrom": [
+            "dataset"
+          ],
+          "columnsTo": [
+            "version"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "stock_snapshots_method_method_definitions_version_fk": {
+          "name": "stock_snapshots_method_method_definitions_version_fk",
+          "tableFrom": "stock_snapshots",
+          "tableTo": "method_definitions",
+          "columnsFrom": [
+            "method"
+          ],
+          "columnsTo": [
+            "version"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "stock_snapshots_dataset_listing_id_listings_dataset_id_fk": {
+          "name": "stock_snapshots_dataset_listing_id_listings_dataset_id_fk",
+          "tableFrom": "stock_snapshots",
+          "tableTo": "listings",
+          "columnsFrom": [
+            "dataset",
+            "listing_id"
+          ],
+          "columnsTo": [
+            "dataset",
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "stock_snapshots_dataset_scenario_id_scenario_sets_dataset_id_fk": {
+          "name": "stock_snapshots_dataset_scenario_id_scenario_sets_dataset_id_fk",
+          "tableFrom": "stock_snapshots",
+          "tableTo": "scenario_sets",
+          "columnsFrom": [
+            "dataset",
+            "scenario_id"
+          ],
+          "columnsTo": [
+            "dataset",
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "stock_snapshots_dataset_session_trading_sessions_dataset_date_fk": {
+          "name": "stock_snapshots_dataset_session_trading_sessions_dataset_date_fk",
+          "tableFrom": "stock_snapshots",
+          "tableTo": "trading_sessions",
+          "columnsFrom": [
+            "dataset",
+            "session"
+          ],
+          "columnsTo": [
+            "dataset",
+            "date"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "stock_snapshots_dataset_id_pk": {
+          "name": "stock_snapshots_dataset_id_pk",
+          "columns": [
+            "dataset",
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {
+        "stock_snapshots_dataset_listing_id_cutoff_horizon_method_unique": {
+          "name": "stock_snapshots_dataset_listing_id_cutoff_horizon_method_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "dataset",
+            "listing_id",
+            "cutoff",
+            "horizon",
+            "method"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {
+        "snapshot_horizon": {
+          "name": "snapshot_horizon",
+          "value": "\"stock_snapshots\".\"horizon\" in ('short','medium','long')"
+        }
+      },
+      "isRLSEnabled": false
+    },
+    "public.trading_sessions": {
+      "name": "trading_sessions",
+      "schema": "",
+      "columns": {
+        "dataset": {
+          "name": "dataset",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "date": {
+          "name": "date",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "close_at": {
+          "name": "close_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "trading_sessions_dataset_dataset_versions_version_fk": {
+          "name": "trading_sessions_dataset_dataset_versions_version_fk",
+          "tableFrom": "trading_sessions",
+          "tableTo": "dataset_versions",
+          "columnsFrom": [
+            "dataset"
+          ],
+          "columnsTo": [
+            "version"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "trading_sessions_dataset_date_pk": {
+          "name": "trading_sessions_dataset_date_pk",
+          "columns": [
+            "dataset",
+            "date"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {
+        "weekday_session": {
+          "name": "weekday_session",
+          "value": "extract(isodow from \"trading_sessions\".\"date\") between 1 and 5"
+        }
+      },
+      "isRLSEnabled": false
+    }
+  },
+  "enums": {},
+  "schemas": {},
+  "sequences": {},
+  "roles": {},
+  "policies": {},
+  "views": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}

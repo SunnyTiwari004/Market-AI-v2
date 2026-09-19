@@ -1,14 +1,14 @@
 # MARKET AI requirement traceability
 
-Product Baseline Gate: 2026-09-15. System Design Gate 1 mapping: 2026-09-16. This map links requirements to conceptual dependencies, likely ownership and intended verification. It does not duplicate their definitions, design a schema/API or claim implementation. Requirement IDs have one definition in their linked owner documents.
+Product Baseline Gate: 2026-09-15. System Design Gate 1 mapping: 2026-09-16. This map links requirements to conceptual dependencies, likely ownership and intended verification. The original map does not duplicate their definitions or design a schema/API; dated implementation evidence is recorded separately below. Requirement IDs have one definition in their linked owner documents.
 
 ## Reading the map
 
 Route aliases: Home = `/`; Explore = `/explore`; Stocks = `/stocks`; Stock = `/stocks/[symbol]`; Decision = `/stocks/[symbol]/decision`; IPOs = `/ipos`; IPO = `/ipos/[slug]`; Ask = `/ask`. **All** means all eight route patterns, including applicable shared controls. Data dependencies name concepts, not database tables, columns or API endpoints.
 
-**S** means likely server ownership for canonical selection, validation, calculations, retrieval and initial rendering; **C** means client/browser interaction or local state. Split ownership does not imply a Client Component page. Developer/operator entries describe future setup/verification work, not public editing or account roles. The linked System Design Gate 1 documents now specify these boundaries; implementation remains outstanding.
+**S** means likely server ownership for canonical selection, validation, calculations, retrieval and initial rendering; **C** means client/browser interaction or local state. Split ownership does not imply a Client Component page. Developer/operator entries describe future setup/verification work, not public editing or account roles. The linked System Design Gate 1 documents now specify these boundaries; full-release implementation remains outstanding; the partial slice is recorded below.
 
-Every row is **SPECIFIED** and **IMPLEMENTATION NOT STARTED**. The final column records specification progress or a remaining prerequisite; it is not an implementation pass. **DATA/METHOD SPECIFIED** means the logical model/method is documented, not that records or calculations exist. **ARCHITECTURE SPECIFIED** means the server boundary is documented, not that hosting/provider configuration or code exists. Actual dataset content and operational budgets remain outstanding. **DESIGN REFERENCE REQUIRED** identifies relevant missing presentation evidence. Multiple prerequisites can apply: the [visual dependency map](PRD.md#prd-011-visual-and-architecture-prerequisites) applies to every affected row, not just those displaying that status.
+Every row is **SPECIFIED**. The tables retain their baseline design/prerequisite statuses; the dated implementation evidence below overrides the original **IMPLEMENTATION NOT STARTED** state only for the explicitly listed partial scopes. No entire Release-1 requirement is complete. The final column records specification progress or a remaining prerequisite; it is not an implementation pass. **DATA/METHOD SPECIFIED** means the logical model/method is documented, not that records or calculations exist. **ARCHITECTURE SPECIFIED** means the server boundary is documented, not that hosting/provider configuration or code exists. Actual dataset content and operational budgets remain outstanding. **DESIGN REFERENCE REQUIRED** identifies relevant missing presentation evidence. Multiple prerequisites can apply: the [visual dependency map](PRD.md#prd-011-visual-and-architecture-prerequisites) applies to every affected row, not just those displaying that status.
 
 ## Verification sources
 
@@ -91,11 +91,11 @@ Every row is **SPECIFIED** and **IMPLEMENTATION NOT STARTED**. The final column 
 
 Coverage: **12 PRD + 7 EXP + 18 INT + 13 NFR = 50 defined requirements**, each mapped once above. References elsewhere do not create new definitions. EXP/INT IDs and meanings remain unchanged. The six Stock views share the bounded INT-012 definition and are individually scoped in PRD-004; no invented extra EXP/INT IDs are needed.
 
-The five required visual references remain outstanding for their specified frontend areas. The technical documents below now specify logical data, research methods, server boundaries and grounding validation. Fictional identities/calendar and evidence-content slots are now specified in the Synthetic Universe Design Gate below. Numerical records, actual source bodies, physical schema implementation, hosting/provider selection and operational budgets remain outstanding. No row claims a populated dataset, executed methodology, implemented interface or permission to implement. PostgreSQL/Drizzle are recorded design recommendations; no cloud or AI vendor is selected.
+The five required visual references remain outstanding for their specified frontend areas. The technical documents below now specify logical data, research methods, server boundaries and grounding validation. Fictional identities/calendar and evidence-content slots are now specified in the Synthetic Universe Design Gate below. Numerical records, actual source bodies, physical schema implementation, hosting/provider selection and operational budgets remain outstanding. At that gate no row claimed a populated dataset, executed methodology or implemented interface. PostgreSQL/Drizzle were recorded design recommendations; no cloud or AI vendor is selected.
 
 ## System design verification sources
 
-These links supplement the original acceptance sources without copying physical entity names into product requirements. Each row names conceptual design coverage; all original requirement rows remain implementation-not-started.
+These links supplement the original acceptance sources without copying physical entity names into product requirements. Each row names conceptual design coverage; the original design mapping is preserved, with partial implementation evidence recorded below.
 
 | Requirements | Design source | Verification handoff |
 | --- | --- | --- |
@@ -116,7 +116,7 @@ These links supplement the original acceptance sources without copying physical 
 
 ## Synthetic universe verification sources
 
-Synthetic Universe Design Gate, 2026-09-17: these resolve identity, calendar, content-inventory and seed-policy dependencies only. All 50 original requirement definitions and statuses remain valid; implementation is still IMPLEMENTATION NOT STARTED. No generated records or passing implementation tests are claimed.
+Synthetic Universe Design Gate, 2026-09-17: these resolve identity, calendar, content-inventory and seed-policy dependencies only. All 50 original requirement definitions and statuses remain valid; implementation was still IMPLEMENTATION NOT STARTED at that gate. Its mapping did not claim generated records or passing implementation tests.
 
 | Requirements | New specification | Verification handoff |
 | --- | --- | --- |
@@ -124,3 +124,23 @@ Synthetic Universe Design Gate, 2026-09-17: these resolve identity, calendar, co
 | PRD-004, PRD-007, INT-006, INT-007, INT-008, INT-010, INT-011, INT-012, INT-014, INT-015 | [Evidence corpus](../data/SYNTHETIC_UNIVERSE.md#evidence-corpus-inventory), [discovery membership](../data/SYNTHETIC_UNIVERSE.md#themes-and-collections), [concepts](../data/SYNTHETIC_UNIVERSE.md#six-concept-records-and-ask-grounding) | Bounded source coverage and identity routing for required views and four Ask capabilities; no actual source bodies or AI calls yet. |
 | PRD-008, EXP-001, EXP-003, EXP-004, INT-013, NFR-010 | [Scenario assumptions](../data/SEED_BLUEPRINT.md#scenario-assumption-blueprint), [historical stories](../data/SYNTHETIC_UNIVERSE.md#what-changed-storylines-and-continuity) | Same future calculation authority across depth/horizon; input intentions never substitute for executed classifications. |
 | PRD-005, PRD-011, PRD-012, NFR-012 | [Publication validation](../data/SEED_BLUEPRINT.md#publication-blocking-validation-contract), [first slice](../data/SEED_BLUEPRINT.md#smallest-future-implementation-slice) | Distinguish blocking integrity/full-release obligations from nonblocking category diversity and explicitly partial development slices; visual prerequisites unchanged. |
+
+## Implementation Milestone 1 evidence — 2026-09-18
+
+**PARTIAL RELEASE-1 IMPLEMENTATION; CORE SLICE LIVE DATABASE VERIFICATION PASSED.** The authorized Digital Operations Services development slice covers three companies, not the final Release-1 universe. Dataset `market-ai-core-slice-v1`, methodology `research-method-v1`; cutoffs 2026-08-01, 2026-08-31 and 2026-09-30. Evidence applies to Windows/Node 24 local verification, not deployment or release certification. See [setup and limitations](../../README.md#core-data-slice-setup).
+
+| Requirements | Implemented partial scope | Verification and remaining work |
+| --- | --- | --- |
+| PRD-002, PRD-003, NFR-007, NFR-008 | Deterministic three-company financial/history/evidence builder and 27 snapshot outputs | [Research tests](../../tests/research.test.ts) and offline seed validation cover reconciliation, chronology, provenance and reproducibility. PostgreSQL insertion and persisted validation now pass for this slice; final-universe coverage remains outstanding. |
+| PRD-005, PRD-008, EXP-003, NFR-013 | Pure Decimal methodology, versioned assumptions, horizon-specific research and compatible What Changed | Independent formula/boundary tests and typed module separation. No claim that every route or research domain is implemented. |
+| PRD-001, EXP-002, EXP-004, INT-007, INT-012, INT-018 | Simple Stock Overview, source bodies, scenario disclosure and simulated-data labels | Route compiles; service/render tests exercise the bounded view. Live populated route verification now passes for all three companies; other Stock views and explanation levels remain outstanding. |
+| INT-001, INT-003, INT-004, INT-005, INT-017, NFR-009 | Working GET cutoff/horizon selection, local disclosures and controlled missing/failure paths | [Overview tests](../../tests/overview.test.ts) cover input validation and failure handling. No unfinished navigation/CTA is exposed. Full cross-route browser acceptance remains outstanding. |
+| PRD-009, NFR-004, NFR-006, NFR-011 | Server-only database access; no authentication, persistent user data or raw driver-error logging | Static boundary inspection and sanitized service-error test. Operational deployment/role verification remains outstanding. |
+| NFR-002, NFR-003 | Semantic Overview controls, native modal, visible focus, readable responsive layouts | Isolated populated test fixture checked at 320px and desktop: no page/dialog overflow, 44px controls, source-dialog Escape and focus return. Full assistive-technology and broader browser acceptance remain outstanding. |
+| NFR-010, NFR-012 | Test runner, generated migration, seed scripts, documented environment/setup and production compilation | Offline automated suite/lint and Webpack build verified. Default Turbopack also passed the completion audit; the earlier host restriction is not currently reproducible. PostgreSQL integration now passes; CI, clean-host reproduction and deployment remain outstanding. |
+
+All other implementation scopes remain **IMPLEMENTATION NOT STARTED**. No grounded AI, full dataset, final-release completion or approval of the five missing visual references is implied. Original requirement definitions and the 50-ID inventory remain unchanged.
+
+Completion audit, 2026-09-18: 87 offline tests and lint pass, including direct peer-deduplication, previous-session, content-digest and contextual-status checks. No database URL, PostgreSQL service/installation, psql or Docker installation was found. Live database checks and commit/landing remain blocked; no additional requirement is marked complete.
+
+Live completion verification, 2026-09-19: isolated local PostgreSQL 18.6; generated migration, persisted-data reconciliation, exact canonical valuation comparison, all 27 repository contexts, all-table seed replay, three populated routes and live source dialogs passed. Controlled failure used a separate app process with an unavailable local connection; actual database access was preserved. 88 unit/component and 2 explicit PostgreSQL integration tests pass. Lint and both production compilers pass. Earlier blocked entries are historical and superseded for this slice only; no full Release-1 requirement is marked complete.

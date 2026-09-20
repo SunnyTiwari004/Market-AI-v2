@@ -10,14 +10,14 @@ export async function readStock(symbol: string, cutoff: string, horizon: Horizon
     const published = await db.select().from(t.datasets).where(and(eq(t.datasets.version, version), eq(t.datasets.published, true))).limit(1);
     if (!published.length)
         throw new Error("DATASET_UNAVAILABLE");
-    const found = await db.select({ listing: t.listings, issuer: t.issuers }).from(t.listings).innerJoin(t.issuers, and(eq(t.issuers.dataset, t.listings.dataset), eq(t.issuers.id, t.listings.issuerId))).where(and(eq(t.listings.dataset, version), eq(t.listings.symbol, symbol.toUpperCase()))).limit(1);
+    const found = await db.select({ listing: t.listings, issuer: t.issuers, sector: t.sectors }).from(t.listings).innerJoin(t.issuers, and(eq(t.issuers.dataset, t.listings.dataset), eq(t.issuers.id, t.listings.issuerId))).innerJoin(t.sectors, and(eq(t.sectors.dataset, t.issuers.dataset), eq(t.sectors.id, t.issuers.sectorId))).where(and(eq(t.listings.dataset, version), eq(t.listings.symbol, symbol.toUpperCase()))).limit(1);
     if (!found.length)
         return null;
-    const { listing, issuer } = found[0];
+    const { listing, issuer, sector } = found[0];
     const rows = await db.select().from(t.snapshots).where(and(eq(t.snapshots.dataset, version), eq(t.snapshots.listingId, listing.id), eq(t.snapshots.horizon, horizon), lte(t.snapshots.cutoff, cutoff))).orderBy(desc(t.snapshots.cutoff)).limit(2);
     // A prior row must never masquerade as missing selected research.
     if (!rows.length || rows[0].cutoff !== cutoff)
-        return { issuer, listing, snapshot: null, previous: null, evidence: [], scenario: null, assumptions: [], quote: null, previousQuote: null };
+        return { issuer, listing, sector, snapshot: null, previous: null, evidence: [], scenario: null, assumptions: [], quote: null, previousQuote: null };
     async function hydrate(row: typeof rows[number]): Promise<Snapshot> {
         const [financial, prices, peers, evidence, findings] = await Promise.all([
             db.select().from(t.snapshotFinancial).where(and(eq(t.snapshotFinancial.dataset, version), eq(t.snapshotFinancial.snapshotId, row.id))),
@@ -51,5 +51,5 @@ export async function readStock(symbol: string, cutoff: string, horizon: Horizon
     const assumptions = await db.select().from(t.cases).where(and(eq(t.cases.dataset, version), eq(t.cases.assumptionId, output[0].assumptionId)));
     assumptions.sort((a, b) => ["Weak", "Base", "Strong"].indexOf(a.label) - ["Weak", "Base", "Strong"].indexOf(b.label));
     const quotes = await db.select().from(t.prices).where(and(eq(t.prices.dataset, version), eq(t.prices.listingId, listing.id), lte(t.prices.date, snapshot.session))).orderBy(desc(t.prices.date)).limit(2);
-    return { issuer, listing, snapshot, previous, evidence, scenario: output[0].output, assumptions, quote: quotes[0]?.date === snapshot.session ? quotes[0] : null, previousQuote: quotes[1]?.date === previousSession(snapshot.session) ? quotes[1] : null };
+    return { issuer, listing, sector, snapshot, previous, evidence, scenario: output[0].output, assumptions, quote: quotes[0]?.date === snapshot.session ? quotes[0] : null, previousQuote: quotes[1]?.date === previousSession(snapshot.session) ? quotes[1] : null };
 }

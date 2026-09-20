@@ -4,7 +4,8 @@ import { businessHealth, growthPotential, financialHealth, risk, direction, valu
 import { HORIZONS, type Assumption, type ScenarioSet, type Snapshot } from "../../domain/research/types";
 import type { Inputs } from "./inputs";
 import { id } from "./identity";
-import { DATASET, METHOD, BUSINESSES } from "./spec";
+import { DATASET, METHOD } from "./spec";
+import { UNIVERSE } from "./universe-spec";
 export function buildResearch(input: Inputs) {
     const assumptions: Assumption[] = [], scenarioSets: ScenarioSet[] = [], snapshots: Snapshot[] = [];
     for (const cutoff of CUTOFFS) {
@@ -24,12 +25,12 @@ export function buildResearch(input: Inputs) {
             const business = businessHealth(field("revenue"), fin.ebit, fin.income, fin.ocf), growthResult = growthPotential(revGrowth, revenueCagr, progression), financial = financialHealth(fin);
             const pr = priceRisk(c.prices, cutoff), riskResult = risk(fin, pr.volatility, pr.drawdown), v = valuation(c.valuation, contexts.map(x => x.valuation));
             const visible = input.evidence.filter(e => e.issuerId === c.issuer.id && Date.parse(e.publishedAt) <= Date.parse(timestamp(cutoff)));
-            const peerPeriods = contexts.filter(x => x.listing.id !== c.listing.id).flatMap(x => x.trailing.periods);
+            const peerPeriods = contexts.filter(x => x.listing.id !== c.listing.id && x.issuer.sectorId === c.issuer.sectorId).flatMap(x => x.trailing.periods);
             const ownPeriods = c.periods.filter(p => Date.parse(p.publishedAt) <= Date.parse(timestamp(cutoff)));
             const evidenceIds = [...new Set([...visible.map(e => e.id), ...peerPeriods.map(p => p.sourceId)])].sort();
-            const completePrices = c.prices.length === sessions(START, session).length && c.prices.every(p => d(p.close)?.gt(0));
+            const completePrices = c.prices.length === sessions(c.listing.listedAt > START ? c.listing.listedAt : START, session).length && c.prices.every(p => d(p.close)?.gt(0));
             const conf = confidence([evidenceIds.every(key => input.evidence.some(e => e.id === key)), ownPeriods.filter(p => p.basis === "annual").length === 3 && ownPeriods.filter(p => p.basis === "quarterly").length === 8, fresh && daysBetween(c.trailing.periods.at(-1)?.end ?? "1900-01-01", cutoff) <= 200, completePrices, evidenceIds.every(key => !!input.evidence.find(e => e.id === key)?.body.trim())], visible.length > 0);
-            const b = BUSINESSES.find(x => x.key === c.issuer.key)!;
+            const b = UNIVERSE.find(x => x.key === c.issuer.key)!;
             const assumption: Assumption = { id: id("assumption", `${c.listing.id}/${cutoff}/${METHOD}`), listingId: c.listing.id, cutoff, dataset: DATASET, method: METHOD, days: 30, cases: b.scenario.map(([g, m], i) => ({ label: (["Weak", "Base", "Strong"] as const)[i], g, m, rationale: `Authored educational assumption: ${["earnings pressure and peer-multiple compression", "broadly stable operating conditions and peer multiples", "improved earnings conditions and a higher peer multiple"][i]}. ${b.description} This sensitivity is not a predicted report or probability.`, evidenceIds: a ? [a.sourceId] : [] })) };
             assumptions.push(assumption);
             const scenario: ScenarioSet = { id: id("scenario", `${c.listing.id}/${cutoff}/${METHOD}`), listingId: c.listing.id, cutoff, assumptionId: assumption.id, result: scenarios(assumption, { listingId: c.listing.id, cutoff, dataset: DATASET, method: METHOD }, c.trailing.eps, v.median, c.valuation.close, v.eligible.length) };
@@ -41,7 +42,7 @@ export function buildResearch(input: Inputs) {
                 snapshots.push({ id: id("snapshot", `${c.listing.id}/${cutoff}/${horizon}/${METHOD}`), listingId: c.listing.id, issuerId: c.issuer.id, dataset: DATASET, method: METHOD, cutoff, session, horizon, basis: "INR/standalone/unadjusted/weekday-calendar-v1/30-days", annualEnd: a?.end ?? null, ttmEnd: c.trailing.periods.at(-1)?.end ?? null,
                     metrics: { revenueGrowth: serialize(revGrowth), cagr: serialize(revenueCagr), eps: serialize(currentEps), epsGrowth: serialize(progression.growth, "EARNINGS_STATE_NO_PERCENTAGE"), margin: serialize(margin(fin.ebit, field("revenue"))), cashConversion: serialize(cashConversion(fin.ocf, fin.income)), fcf: serialize(freeCashFlow(fin.ocf, fin.capex)), debtEquity: serialize(debtEquity(fin.debt, fin.equity)), coverage: serializedCoverage(interestCoverage(fin.ebit, fin.interest, fin.debt)), volatility: serialize(pr.volatility), drawdown: serialize(pr.drawdown), ttmEps: serialize(c.trailing.eps, c.trailing.reason ?? undefined), pe: serialize(v.pe), peerMedian: serialize(v.median), valuationRatio: serialize(v.ratio), return20: serialize(r20), return60: serialize(r60), return252: serialize(r252) },
                     business, growth: growthResult, financial, risk: riskResult, valuation: v.assessment, direction: dir, picture: researchPicture(horizon, business, growthResult, financial, riskResult, dir, v.assessment), confidence: conf, earningsState: progression.state, scenarioId: scenario.id, findings, evidenceIds,
-                    financialIds: [...new Set([...ownPeriods, ...peerPeriods].map(p => p.id))].sort(), priceIds: [...c.prices.map(p => p.id), ...contexts.filter(x => x.listing.id !== c.listing.id).flatMap(x => x.prices.filter(p => p.date === session).map(p => p.id))].sort(), peerIds: contexts.filter(x => x.listing.id !== c.listing.id).map(x => x.listing.id).sort() });
+                    financialIds: [...new Set([...ownPeriods, ...peerPeriods].map(p => p.id))].sort(), priceIds: [...c.prices.map(p => p.id), ...contexts.filter(x => x.listing.id !== c.listing.id && x.issuer.sectorId === c.issuer.sectorId).flatMap(x => x.prices.filter(p => p.date === session).map(p => p.id))].sort(), peerIds: contexts.filter(x => x.listing.id !== c.listing.id && x.issuer.sectorId === c.issuer.sectorId).map(x => x.listing.id).sort() });
             }
         }
     }

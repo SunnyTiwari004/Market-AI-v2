@@ -59,14 +59,14 @@ describe("confidence and scenarios", () => {
 });
 describe("seed integrity and What Changed", () => {
     it("rejects a changed content digest",()=>{expect(()=>validateSlice({...slice,digest:"invalid"})).toThrow("digest mismatch");});
-    it("validates full slice and reproduces exact digest", () => { expect(validateSlice(slice).snapshots).toBe(27); expect(buildSlice().digest).toBe(slice.digest); });
+    it("validates full slice and reproduces exact digest", () => { expect(validateSlice(slice).snapshots).toBe(108); expect(buildSlice().digest).toBe(slice.digest); });
     it.each(["snapshot", "price", "version", "source", "cash"])("rejects corrupted %s", kind => { const s = structuredClone(slice); if (kind === "snapshot")
         s.snapshots.pop(); if (kind === "price")
         s.prices.splice(20, 1); if (kind === "version")
         s.snapshots[0].method = "wrong"; if (kind === "source")
         s.snapshots[0].evidenceIds.push("unknown"); if (kind === "cash")
-        s.financials[0].closingCash = "1"; const {sector,issuers,listings,financials,prices,evidence,assumptions,scenarioSets,snapshots}=s;
-        s.digest=digest({sector,issuers,listings,financials,prices,evidence,assumptions,scenarioSets,snapshots});
+        s.financials[0].closingCash = "1"; const {version,method,generator,seed,profile,digest:oldDigest,...content}=s;
+        void [version,method,generator,seed,profile,oldDigest]; s.digest=digest(content);
         expect(() => validateSlice(s)).toThrow(); });
     it("compares compatible snapshots and rejects changed method", () => { const first = slice.snapshots[0], next = slice.snapshots.find(s => s.listingId === first.listingId && s.horizon === first.horizon && s.cutoff === "2026-08-31")!; expect(whatChanged(first, next).availability).toBe("available"); expect(whatChanged({ ...first, method: "other" }, next).availability).toBe("unavailable"); expect(whatChanged(null, first).reasons).toContain("NO_PRIOR_SNAPSHOT"); });
     it("all horizons share one scenario owner per cutoff", () => { for (const listing of slice.listings)

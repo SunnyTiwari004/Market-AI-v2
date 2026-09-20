@@ -11,7 +11,7 @@ export function stockFixture(): Extract<NonNullable<Awaited<ReturnType<typeof re
     const assumptions = slice.assumptions.find(a => a.id === scenario.assumptionId)!;
     const quotes = slice.prices.filter(p => p.listingId === listing.id && p.date <= snapshot.session).slice(-2);
     return {
-        issuer: { dataset, ...issuer }, listing: { dataset, ...listing, currency: "INR", venue: "Market AI Simulated Market" }, snapshot, previous,
+        sector: { dataset, ...slice.sector }, issuer: { dataset, ...issuer }, listing: { dataset, ...listing, currency: "INR", venue: "Market AI Simulated Market" }, snapshot, previous,
         evidence: slice.evidence.filter(e => snapshot.evidenceIds.includes(e.id)), scenario: scenario.result,
         assumptions: assumptions.cases.map(c => ({ dataset, id: id("case", `${assumptions.id}/${c.label}`), assumptionId: assumptions.id, ...c })),
         quote: { dataset, ...quotes[1] }, previousQuote: { dataset, ...quotes[0] },

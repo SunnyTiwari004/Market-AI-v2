@@ -95,13 +95,17 @@ export function scenarios(a: Assumption, context: {
 }, eps: Numeric, median: Numeric, close: Numeric, peerCount: number): Result<ScenarioOutput[]> {
     if (a.listingId !== context.listingId || a.cutoff !== context.cutoff || a.dataset !== context.dataset || a.method !== context.method || a.days !== 30)
         return unavailable("ASSUMPTION_CONTEXT_MISMATCH");
-    if (a.cases.length !== 3 || a.cases.some((c, i) => c.label !== ["Weak", "Base", "Strong"][i] || !c.rationale.trim() || !decimal(c.g)?.gt(-1) || !decimal(c.m)?.gt(0)))
+    return scenarioValues(a.cases, eps, median, close, peerCount);
+}
+// Common formula, with Stock/IPO identity and window checked by their callers.
+export function scenarioValues(cases: Assumption["cases"], eps: Numeric, median: Numeric, close: Numeric, peerCount: number): Result<ScenarioOutput[]> {
+    if (cases.length !== 3 || cases.some((c, i) => c.label !== ["Weak", "Base", "Strong"][i] || !c.rationale.trim() || !decimal(c.g)?.gt(-1) || !decimal(c.m)?.gt(0)))
         return unavailable("INVALID_ASSUMPTIONS");
     if (!eps?.gt(0) || !median?.gt(0) || !close?.gt(0) || peerCount < 2)
         return unavailable("VALUATION_PREREQUISITES_UNAVAILABLE");
-    const values = a.cases.map(c => eps.times(new D(1).plus(c.g)).times(median).times(c.m));
+    const values = cases.map(c => eps.times(new D(1).plus(c.g)).times(median).times(c.m));
     if (values[0].gt(values[1]) || values[1].gt(values[2]))
         return unavailable("SCENARIO_ORDER_VIOLATION");
-    return result(values.map((v, i) => ({ label: a.cases[i].label, price: v.toFixed(12), change: v.div(close).minus(1).times(100).toFixed(12) })));
+    return result(values.map((v, i) => ({ label: cases[i].label, price: v.toFixed(12), change: v.div(close).minus(1).times(100).toFixed(12) })));
 }
 export function serializedCoverage(r: Result<Decimal>): Result<string> { return { ...r, value: r.value?.toFixed(12) ?? null }; }

@@ -1,8 +1,8 @@
 // Reviewed input intentions: amounts are INR; profits/cash precede any assessment.
-// This deliberately partial version cannot be mistaken for full Release 1.
-export const DATASET = "market-ai-core-slice-v1";
+// Original three-company inputs are retained as regression fixtures.
+export const DATASET = "market-ai-synthetic-v1";
 export const METHOD = "research-method-v1";
-export const GENERATOR = "core-slice-generator-v1";
+export const GENERATOR = "full-universe-generator-v1";
 export const SEED = "mai-world-20260930-a";
 export const SECTOR = { key: "s-6f2a", name: "Digital Operations Services", slug: "digital-operations-services" };
 export const BUSINESSES = [

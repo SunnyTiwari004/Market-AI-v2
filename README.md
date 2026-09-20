@@ -4,9 +4,9 @@ Beginner-first, evidence-backed financial research college / portfolio project.
 
 MARKET AI teaches financial research through a permanently synthetic, fictional financial universe. Companies, prices, statements, articles, filings, IPOs, evidence, and scenarios are simulated for educational/demonstration use. The canonical disclosure is **College Project · Simulated financial data**. Content must not imply live exchange information, real-source verification, or investment advice.
 
-Current project status: **Implementation Milestone 1 — verified core data vertical slice.** PostgreSQL/Drizzle schema and generated migration, a deterministic three-company seed builder, research calculations, 27 snapshots, server-only queries and a bounded Stock Overview are implemented. Live migration, seed replay, persisted-data validation, all 27 query contexts and populated Stock routes have been verified against isolated local PostgreSQL 18.6. There is no production fallback dataset.
+Current project status: **Implementation Milestone 2 — full synthetic universe implemented and live-validated.** The canonical `market-ai-synthetic-v1` dataset now contains 15 issuers, 12 listings, four IPO offers, 108 Stock snapshots and the complete evidence corpus. All 12 existing Stock Overview routes resolve live PostgreSQL data. Unit/component tests, PostgreSQL integration, lint and Webpack build pass. See [the verification report](docs/data/MILESTONE_2_REPORT.md).
 
-The intended application has real frontend/backend implementation, database, APIs, routing, search/filtering, calculations, research engine, historical snapshots, What Changed logic, eventual AI integration, accessibility, testing, CI/CD, and deployment. Each implementation milestone requires explicit authorization. The synthetic dataset is the final project data strategy; commercial market-data licensing/integration is not planned. Fictional identities and chronology are now specified in the synthetic-universe blueprint; numerical generation now covers only the authorized three-company development slice. Real-company Stitch examples remain design references only.
+The intended application has real frontend/backend implementation, database, APIs, routing, search/filtering, calculations, research engine, historical snapshots, What Changed logic, eventual AI integration, accessibility, testing, CI/CD, and deployment. Each implementation milestone requires explicit authorization. The synthetic dataset is the final project data strategy; commercial market-data licensing/integration is not planned. Fictional identities and chronology are now specified in the synthetic-universe blueprint; numerical generation now covers the authorized full fictional universe. Real-company Stitch examples remain design references only.
 
 Technology baseline: Next.js App Router, TypeScript, React, Tailwind CSS, and pnpm. [package.json](package.json) and [pnpm-lock.yaml](pnpm-lock.yaml) own dependency versions.
 
@@ -22,6 +22,8 @@ pnpm dev
 Open [localhost:3000](http://localhost:3000).
 
 Run `pnpm lint` to lint the project and `pnpm build` to create a production build. After a successful build, use `pnpm start` to start the production server.
+
+The canonical production verification command is `pnpm build`, using Next.js Webpack for Release 1 local and CI builds unless a later verified environment supports changing that decision. The current Windows development host denied Turbopack CSS-worker process creation (`Access is denied`, error 5); no Windows security controls were weakened. `pnpm build:turbopack` remains available as an optional, non-blocking diagnostic. This limitation is specific to the observed host, not a claim about every machine.
 
 ## Documentation
 
@@ -58,6 +60,16 @@ The five [required visual references](docs/design/DESIGN_SYSTEM.md#gate-25-refer
 System Design Gate 1 (2026-09-16) now specifies the logical model, deterministic educational research methods, modular backend and browser server interfaces linked above. PostgreSQL/Drizzle are design recommendations, not installed dependencies. Remaining work includes design review, actual fictional identities/calendar/content, physical schema/migrations in an authorized implementation milestone, hosting/provider/resource decisions and the relevant visual references. No records, migrations, APIs or first-slice implementation are created by this gate; the earlier baseline paragraph records that milestone's handoff.
 
 Synthetic Universe Design Gate (2026-09-17) defines the 15 fictional issuers, four sectors, fixed 2026-09-30 clock, evidence/content inventory and future seed-validation workflow. The linked blueprint resolves identity/calendar design, not numerical generation or implementation. The methodology remains unchanged; statement values, price paths, source bodies, scenario inputs and all application/database work are still outstanding. Earlier handoff paragraphs record their original milestone boundaries.
+
+## Full synthetic universe setup
+
+Use the same commands below. `pnpm db:migrate` applies the additive second migration; `pnpm db:seed` installs or verifies the full dataset; `pnpm db:validate --live` checks all 108 database-backed research contexts. `pnpm db:validate --coverage` reports categorical coverage without quotas. With a production server on port 3100, `node --import=tsx scripts/verify-routes.ts` checks all Stock routes and IPO-only not-found behavior. No new dependencies are required.
+
+The first seed transaction may replace only the exact fingerprinted `market-ai-core-slice-v1` development profile, after checking localhost and database identity. It refuses additional datasets, unexpected fingerprints and changed methodology specifications. The existing method implementation digest included all seed-authoring modules; the authorized transition rebinds that development manifest once, while regression fingerprints prove the original three research results and inputs are unchanged. Full-dataset replay is an immutable no-op; conflicting content is rejected. No generic reset, cascade deletion or schema push exists.
+
+Indexes are derived from canonical stored closes: 523 broad-index points and 523 per sector. They are not separately stored editable numbers. Meruvan joins after its first close and retains separate historical IPO research. A transferred-share ownership column records the public receipt of OFS shares, without treating transfers as new issuance.
+
+No IPO, Home, Explore, Ask AI, Decision or additional Stock view is implemented. The paragraphs below preserve the completed Milestone 1 verification history; their three-company counts and version identify that earlier profile.
 
 ## Core data slice setup
 

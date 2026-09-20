@@ -62,14 +62,14 @@ export interface Price {
 }
 export interface Evidence {
     id: string;
-    issuerId: string;
-    kind: "document" | "article";
+    issuerId: string | null;
+    kind: "document" | "article" | "concept";
     title: string;
     publishedAt: string;
     body: string;
     publisher: string;
     simulated: true;
-    documentType: "annual" | "quarterly" | "announcement" | null;
+    documentType: "annual" | "quarterly" | "announcement" | "offer" | "lifecycle" | null;
 }
 export interface Assumption {
     id: string;

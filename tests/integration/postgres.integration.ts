@@ -6,11 +6,54 @@ import { verifyDatabase } from "../../src/server/db/verify";
 import { closeDatabase } from "../../src/server/db/connection";
 import { seedDatabase } from "../../src/server/db/seed";
 import { digest } from "../../src/data/synthetic/identity";
+import { readFinancials, readCloses, readSources, readSectorPeers } from "../../src/server/stock-view-repository";
+import { readStock } from "../../src/server/stock-repository";
+import { UNIVERSE } from "../../src/data/synthetic/universe-spec";
 if (existsSync(".env.local")) process.loadEnvFile(".env.local");
 const url = new URL(process.env.DATABASE_URL ?? "http://unconfigured");
 if (!["localhost", "127.0.0.1", "[::1]"].includes(url.hostname) || url.port !== "5432" || url.pathname !== "/market_ai_v2_dev" || decodeURIComponent(url.username) !== "market_ai_dev") throw new Error("Integration requires the designated local development database");
 const sql = postgres(process.env.DATABASE_URL!, { max:1, onnotice:()=>{} });
 after(async()=>{await closeDatabase(); await sql.end();});
+
+test("all Stock view reads resolve canonical periods, closes, issuer sources and same-sector peers", async () => {
+    for (const company of UNIVERSE.filter(c => c.symbol)) {
+        const stock = await readStock(company.symbol!, "2026-09-30", "long");
+        assert.ok(stock?.snapshot);
+        const [financials, closes, articles, documents, peers] = await Promise.all([
+            readFinancials(stock.issuer.id, "2026-09-30"), readCloses(stock.listing.id, "2026-09-30"),
+            readSources(stock.issuer.id, "2026-09-30", "article"), readSources(stock.issuer.id, "2026-09-30", "document"),
+            readSectorPeers(stock.sector.id, "2026-09-30", "long"),
+        ]);
+        assert.equal(financials.filter(r => r.period.basis === "annual").length, 3);
+        assert.equal(financials.filter(r => r.period.basis === "quarterly").length, 8);
+        for (const row of financials) {
+            assert.ok(row.income && row.balance && row.cashflow);
+            assert.ok(documents.some(s => s.id === row.period.sourceId && s.body.includes(row.income!.revenue)));
+        }
+        assert.equal(closes.length, company.symbol === "MERUVAN" ? 89 : 523);
+        assert.ok(closes.every(p => p.date >= stock.listing.listedAt));
+        assert.equal(closes.at(-1)!.close, stock.quote!.close);
+        assert.ok(articles.length >= 2);
+        assert.ok(articles.every(s => s.kind === "article" && s.body.length > 0 && s.simulated));
+        assert.deepEqual(articles.map(s => s.publishedAt), articles.map(s => s.publishedAt).sort().reverse());
+        assert.ok(documents.every(s => s.kind === "document" && s.issuerId === stock.issuer.id));
+        assert.equal(peers.length, 3); assert.equal(new Set(peers.map(p => p.listing.id)).size, 3);
+        assert.ok(peers.every(p => p.issuer.sectorId === stock.sector.id));
+        assert.equal(peers.filter(p => p.listing.id !== stock.listing.id).length, 2);
+    }
+});
+
+test("historical Stock view reads exclude later publications and preserve unavailable peer earnings", async () => {
+    const stock = await readStock("MERUVAN", "2026-08-01", "long"); assert.ok(stock);
+    const records = await readFinancials(stock.issuer.id, "2026-08-01");
+    assert.ok(records.every(r => r.period.publishedAt.slice(0, 10) <= "2026-08-01"));
+    assert.ok(!records.some(r => r.period.end === "2026-06-30"));
+    const articles = await readSources(stock.issuer.id, "2026-08-01", "article");
+    assert.ok(articles.every(s => s.publishedAt.slice(0, 10) <= "2026-08-01"));
+    const peers = await readSectorPeers(stock.sector.id, "2026-08-01", "long");
+    assert.equal(peers.length, 3);
+    assert.equal(peers.find(p => p.listing.id === stock.listing.id)!.research!.output.metrics.pe.value, null);
+});
 test("persisted slice and all repository contexts match canonical generation",async()=>{
     const result=await verifyDatabase();
     assert.equal(result.snapshots,108);assert.equal(result.repositoryContexts,108);assert.equal(result.prices,5842);

@@ -4,7 +4,7 @@ Beginner-first, evidence-backed financial research college / portfolio project.
 
 MARKET AI teaches financial research through a permanently synthetic, fictional financial universe. Companies, prices, statements, articles, filings, IPOs, evidence, and scenarios are simulated for educational/demonstration use. The canonical disclosure is **College Project · Simulated financial data**. Content must not imply live exchange information, real-source verification, or investment advice.
 
-Current project status: **Implementation Milestone 2 — full synthetic universe implemented and live-validated.** The canonical `market-ai-synthetic-v1` dataset now contains 15 issuers, 12 listings, four IPO offers, 108 Stock snapshots and the complete evidence corpus. All 12 existing Stock Overview routes resolve live PostgreSQL data. Unit/component tests, PostgreSQL integration, lint and Webpack build pass. See [the verification report](docs/data/MILESTONE_2_REPORT.md).
+Current project status: **Implementation Milestone 3 — complete six-view Stock research implemented and verified locally.** Overview, Financials, Chart, News, Peers and Filings resolve PostgreSQL data for all 12 listings, with Simple/Normal/Pro explanations and shared URL state. The `market-ai-synthetic-v1` dataset and research methodology are unchanged. See [verification and limitations](docs/qa/MILESTONE_3_REPORT.md). This is partial Release-1 implementation, not deployment or release certification.
 
 The intended application has real frontend/backend implementation, database, APIs, routing, search/filtering, calculations, research engine, historical snapshots, What Changed logic, eventual AI integration, accessibility, testing, CI/CD, and deployment. Each implementation milestone requires explicit authorization. The synthetic dataset is the final project data strategy; commercial market-data licensing/integration is not planned. Fictional identities and chronology are now specified in the synthetic-universe blueprint; numerical generation now covers the authorized full fictional universe. Real-company Stitch examples remain design references only.
 
@@ -69,7 +69,7 @@ The first seed transaction may replace only the exact fingerprinted `market-ai-c
 
 Indexes are derived from canonical stored closes: 523 broad-index points and 523 per sector. They are not separately stored editable numbers. Meruvan joins after its first close and retains separate historical IPO research. A transferred-share ownership column records the public receipt of OFS shares, without treating transfers as new issuance.
 
-No IPO, Home, Explore, Ask AI, Decision or additional Stock view is implemented. The paragraphs below preserve the completed Milestone 1 verification history; their three-company counts and version identify that earlier profile.
+At Milestone 2, no additional Stock view was implemented. Milestone 3 adds the remaining five Stock views, explanation controls and Share. Home, Explore, IPO, Ask AI and Decision experiences remain unimplemented. The paragraphs below preserve the completed Milestone 1 verification history; their three-company counts and version identify that earlier profile.
 
 ## Core data slice setup
 

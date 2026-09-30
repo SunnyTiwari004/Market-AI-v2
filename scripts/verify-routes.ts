@@ -3,6 +3,32 @@ import { UNIVERSE } from "../src/data/synthetic/universe-spec";
 import { VIEWS } from "../src/features/stock/state";
 const base="http://localhost:3100";
 async function main(){
+const discovery = [
+    ["/", "Market in Simple Words", "What Matters Today", "Sector Picture", "Worth Researching", "IPO Watch"],
+    ["/explore", "Connected Operations", "Everyday Resource Use", "Recurring Service Models", "Capacity and Cash", "22 results"],
+    ["/stocks", "12 results", "Find a company"],
+    ["/stocks?q=%20tAvReN%20", "1 results", "Tavren Systems Limited"],
+    ["/stocks?q=unknown-company", "0 results", "No matching results"],
+    ["/explore?type=stocks&picture=Weak&risk=Low", "0 results", "No matching results"],
+    ["/explore?type=stocks&theme=connected-operations", "4 results", "Tools and equipment"],
+    ["/explore?type=stocks&collection=capacity-and-cash", "3 results", "Capacity and Cash"],
+    ["/explore?type=sectors&picture=Strong", "4 results", "Unsupported or incompatible URL choices"],
+    ["/explore?section=changes", "12 results", "Recent Research Changes", "#what-changed"],
+    ["/ipos", "4 results", "Elarven Workflow", "Nivora Kitchenware", "Kavreth Fabrication", "Meruvan Controls"],
+    ...["Upcoming", "Open", "Closed", "Listed"].map(status => [`/ipos?status=${status}`, "1 results", status]),
+];
+for (const [path, ...markers] of discovery) {
+    const response = await fetch(`${base}${path}`, { headers: { "User-Agent": "Googlebot" } });
+    const html = await response.text(); assert.equal(response.status, 200, path);
+    for (const marker of markers) assert.ok(html.includes(marker), `${path}: ${marker}`);
+    assert.ok(html.includes("College Project · Simulated financial data"));
+    assert.ok(!html.includes("Research is unavailable"), path);
+    assert.ok(!/href="(?:#|\/ask|\/ipos\/[^\"]*)"/.test(html), `${path}: no dead destinations`);
+    if (path === "/stocks") for (const company of UNIVERSE.filter(c => c.symbol)) assert.ok(html.includes(`href="/stocks/${company.symbol!.toLowerCase()}"`), company.name);
+    console.log(`${path}: PASS`);
+}
+const missingPage = await fetch(`${base}/missing-discovery-route`, { headers: { "User-Agent": "Googlebot" } });
+const missingHtml = await missingPage.text(); assert.ok(missingHtml.includes("Page not found") && missingHtml.includes("noindex"));
 for(const b of UNIVERSE.filter(b=>b.symbol)){
     const response=await fetch(`${base}/stocks/${b.symbol!.toLowerCase()}`,{headers:{"User-Agent":"Googlebot"}});
     const html=await response.text();

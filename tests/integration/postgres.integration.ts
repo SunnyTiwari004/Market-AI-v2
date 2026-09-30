@@ -8,6 +8,37 @@ import { seedDatabase } from "../../src/server/db/seed";
 import { digest } from "../../src/data/synthetic/identity";
 import { readFinancials, readCloses, readSources, readSectorPeers } from "../../src/server/stock-view-repository";
 import { readStock } from "../../src/server/stock-repository";
+import { readDiscovery } from "../../src/server/discovery-repository";
+import { buildDiscovery, selectDiscovery } from "../../src/features/discovery/model";
+import { discoveryState } from "../../src/features/discovery/state";
+
+test("discovery PostgreSQL reads retain canonical identities, events, indexes and IPO lifecycles", async () => {
+    const records = await readDiscovery("long");
+    const state = discoveryState("/explore", {}, { sectors: [], themes: [], collections: [] });
+    const model = buildDiscovery(records, state);
+    assert.equal(records.dataset, "market-ai-synthetic-v1"); assert.equal(records.cutoff, "2026-09-30");
+    assert.equal(model.stocks.length, 12); assert.equal(model.ipos.length, 4); assert.equal(model.sectors.length, 4);
+    assert.deepEqual(model.ipos.map(i => i.terms?.status).sort(), ["Closed", "Listed", "Open", "Upcoming"]);
+    assert.equal(model.market?.memberIds.length, 12);
+    assert.ok(model.events.every(e => records.sources.some(s => s.id === e.evidenceId && s.simulated)));
+    for (const stock of model.stocks) {
+        const detail = await readStock(stock.symbol, records.cutoff, "long");
+        assert.deepEqual(stock.snapshot, detail?.snapshot);
+        assert.equal(stock.href, `/stocks/${stock.symbol.toLowerCase()}`);
+    }
+    assert.equal(selectDiscovery(model, { ...state, theme: "connected-operations" }).stocks.length, 4);
+    assert.equal(selectDiscovery(model, { ...state, collection: "capacity-and-cash" }).stocks.length, 3);
+});
+
+test("discovery horizon and categorical filtering use stored PostgreSQL snapshots", async () => {
+    const records = await readDiscovery("short");
+    const state = discoveryState("/explore", { type: "stocks", horizon: "short", risk: "Low", picture: "Strong" }, { sectors: [], themes: [], collections: [] });
+    const model = buildDiscovery(records, state), selected = selectDiscovery(model, state);
+    assert.ok(model.stocks.every(s => s.snapshot?.horizon === "short"));
+    assert.ok(selected.stocks.every(s => s.snapshot?.risk.value === "Low" && s.snapshot.picture.value === "Strong"));
+    assert.equal(selectDiscovery(model, { ...state, q: "unknown fictional company" }).stocks.length, 0);
+    assert.equal(selectDiscovery(model, { ...state, type: "ipos", status: "Open" }).ipos.length, 1);
+});
 import { UNIVERSE } from "../../src/data/synthetic/universe-spec";
 if (existsSync(".env.local")) process.loadEnvFile(".env.local");
 const url = new URL(process.env.DATABASE_URL ?? "http://unconfigured");

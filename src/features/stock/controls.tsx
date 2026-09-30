@@ -8,6 +8,10 @@ export function StockControls({ symbol, state, canonicalUrl }: { symbol: string;
     const router = useRouter();
     const [pending, startTransition] = useTransition();
     useEffect(() => {
+        const target = window.location.hash === "#what-changed" ? document.querySelector<HTMLElement>("#what-changed h2") : document.querySelector<HTMLElement>("main h1");
+        target?.focus({ preventScroll: !window.location.hash });
+    }, [symbol]);
+    useEffect(() => {
         // Normalize only when the server's accepted state arrives. Depending on
         // the live query here can replace a pending navigation with stale props.
         const current = window.location.pathname + window.location.search;

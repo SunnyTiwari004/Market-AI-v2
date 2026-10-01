@@ -11,6 +11,30 @@ import { readStock } from "../../src/server/stock-repository";
 import { readDiscovery } from "../../src/server/discovery-repository";
 import { buildDiscovery, selectDiscovery } from "../../src/features/discovery/model";
 import { discoveryState } from "../../src/features/discovery/state";
+import { readIpo } from "../../src/server/ipo-repository";
+import { buildIpo } from "../../src/features/ipo/model";
+
+test("four PostgreSQL IPO detail reads reconcile persisted offers, sources and research", async () => {
+    const discovery = await readDiscovery("long");
+    for (const offer of discovery.offers) {
+        const records = await readIpo(offer.slug); assert.ok(records);
+        const model = buildIpo(records); assert.ok(model.terms); assert.ok(model.snapshot);
+        assert.equal(model.offer.id, offer.id); assert.equal(model.issuer.id, offer.issuerId);
+        assert.equal(model.terms.status, buildDiscovery(discovery, discoveryState("/ipos", {}, { sectors: [], themes: [], collections: [] })).ipos.find(i => i.id === offer.id)?.terms?.status);
+        assert.ok(model.researchSources.length > 0);
+        assert.ok(model.researchSources.every(s => Date.parse(s.publishedAt) <= Date.parse(model.snapshot!.cutoff)));
+        assert.ok(model.holders.every(h => h.computed)); assert.ok(model.proceeds.every(p => p.amount !== null));
+        assert.equal(model.categories.length, 3); assert.equal(model.scenarios?.value?.length, 3);
+        assert.ok(model.peers.filter(p => p.eligible).length >= 2);
+        if (model.listing) {
+            const stock = await readStock(model.listing.symbol, discovery.cutoff, "long");
+            assert.equal(stock?.issuer.id, model.issuer.id);
+            assert.equal(model.snapshot.output.picture.value, null);
+            assert.ok(Date.parse(model.snapshot.cutoff) < Date.parse(offer.actualListing!));
+        }
+    }
+    assert.equal(await readIpo("unknown-ipo"), null);
+});
 
 test("discovery PostgreSQL reads retain canonical identities, events, indexes and IPO lifecycles", async () => {
     const records = await readDiscovery("long");

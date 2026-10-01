@@ -89,7 +89,7 @@ describe("service and rendered discovery", () => {
         const html = renderToStaticMarkup(await DiscoveryPage({ route: "/", query: {} }));
         for (const text of ["Market in Simple Words", "What Matters Today", "Sector Picture", "Worth Researching", "Recent Research Changes", "IPO Watch", records.events.find(e => e.kind === "market-sector")!.summary]) expect(html).toContain(text);
         expect(readDiscovery).toHaveBeenCalledWith("long");
-        expect(html).not.toMatch(/href="#"|href="\/ask|href="\/ipos\//);
+        expect(html).not.toMatch(/href="#"|href="\/ask/); expect(html).toContain('href="/ipos/');
     });
     it("renders complete directories and distinct no-match and empty-dataset recovery", async () => {
         vi.mocked(readDiscovery).mockResolvedValue(records);
@@ -97,7 +97,7 @@ describe("service and rendered discovery", () => {
         for (const listing of records.listings) expect(stocks).toContain(`href="/stocks/${listing.symbol.toLowerCase()}"`);
         expect(stocks).toContain("12 results");
         const offers = renderToStaticMarkup(await DiscoveryPage({ route: "/ipos", query: {} }));
-        expect(offers).toContain("4 results"); expect(offers).not.toMatch(/href="\/ipos\//);
+        expect(offers).toContain("4 results"); for (const offer of records.offers) expect(offers).toContain(`href="/ipos/${offer.slug}"`);
         expect(renderToStaticMarkup(await DiscoveryPage({ route: "/stocks", query: { q: "no matching business" } }))).toContain("No matching results");
         vi.mocked(readDiscovery).mockResolvedValue({ ...records, listings: [], stocks: [] });
         expect(renderToStaticMarkup(await DiscoveryPage({ route: "/stocks", query: {} }))).toContain("No canonical records available");

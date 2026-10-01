@@ -1,3 +1,4 @@
+import { ipoUrl } from "../ipo/state";
 import type { DiscoveryRecords } from "../../server/discovery-repository";
 import { marketIndex } from "../../domain/research/market";
 import { whatChanged, type ChangeSet } from "../../domain/research/changes";
@@ -50,7 +51,7 @@ export function buildDiscovery(records: DiscoveryRecords, state: DiscoveryState)
         const issuer = records.issuers.find(i => i.id === offer.issuerId);
         if (!issuer) throw new Error("INVALID_OFFER_ISSUER");
         const terms = offerTerms({ ...offer, holders: [], proceeds: [], reservations: [], subscriptions: [] }, records.referenceAt, publications).value;
-        return { ...offer, kind: "ipos" as const, name: issuer.name, description: issuer.description, sectorId: issuer.sectorId, aliases: [] as string[], terms, sources: records.sources.filter(s => s.id === offer.sourceId || s.id === offer.lifecycleId), href: discoveryUrl("/ipos", state, { q: issuer.name, status: "All" }) };
+        return { ...offer, kind: "ipos" as const, name: issuer.name, description: issuer.description, sectorId: issuer.sectorId, aliases: [] as string[], terms, sources: records.sources.filter(s => s.id === offer.sourceId || s.id === offer.lifecycleId), href: ipoUrl(offer.slug, state.level) };
     }).sort((a, b) => compareText(a.opensAt, b.opensAt) || compareText(a.name, b.name));
     const identities: Identity[] = [...stocks, ...ipos, ...sectors, ...themes].map(({ id, kind, name, aliases, href }) => ({ id, kind, name, aliases, href, symbol: stocks.find(s => s.id === id)?.symbol }));
     return { dataset: records.dataset, cutoff, market, stocks, sectors, themes, collections, ipos, identities, events: records.events.filter(e => e.kind === "market-sector").sort((a, b) => compareText(b.publishedAt, a.publishedAt)), sources: records.sources };

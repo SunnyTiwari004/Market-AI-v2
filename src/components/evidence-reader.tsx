@@ -21,7 +21,7 @@ export function EvidenceReader({ sources, label = "Read supporting sources" }: {
       <div className="reader-header"><h2 id={titleId}>Supporting sources</h2><button autoFocus onClick={() => dialog.current?.close()}>Close</button></div>
       <div className="reader-content" tabIndex={0} role="region" aria-label="Source content">
       <p className="disclosure">College Project · Simulated financial data</p>
-      {sources.map(source => <article className="source-body" key={source.id}><h3>{source.title}</h3><p>{source.publisher} · Published {source.publishedAt.slice(0, 10)}</p><p className="source-text">{source.body}</p></article>)}
+      {sources.map(source => <article className="source-body" key={source.id}><h3>{source.title}</h3><p>{source.publisher} · Published {source.publishedAt.slice(0, 10)}</p><p className="source-text">{source.body.trim() || "— Source content unavailable."}</p></article>)}
       </div>
     </dialog></>;
 }

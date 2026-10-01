@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { UNIVERSE } from "../src/data/synthetic/universe-spec";
 import { VIEWS } from "../src/features/stock/state";
+import { OFFERS } from "../src/data/synthetic/offer-spec";
 const base="http://localhost:3100";
 async function main(){
 const discovery = [
@@ -23,12 +24,30 @@ for (const [path, ...markers] of discovery) {
     for (const marker of markers) assert.ok(html.includes(marker), `${path}: ${marker}`);
     assert.ok(html.includes("College Project · Simulated financial data"));
     assert.ok(!html.includes("Research is unavailable"), path);
-    assert.ok(!/href="(?:#|\/ask|\/ipos\/[^\"]*)"/.test(html), `${path}: no dead destinations`);
+    assert.ok(!/href="(?:#|\/ask)"/.test(html), `${path}: no dead destinations`);
+    if (["/explore", "/ipos"].includes(path)) for (const offer of OFFERS) assert.ok(html.includes(`href="/ipos/${offer.slug}"`), `${path}: ${offer.slug}`);
+    if (path === "/") for (const offer of OFFERS.filter(o => !o.actual).sort((a, b) => a.open.localeCompare(b.open)).slice(0, 2)) assert.ok(html.includes(`href="/ipos/${offer.slug}"`), `${path}: ${offer.slug}`);
     if (path === "/stocks") for (const company of UNIVERSE.filter(c => c.symbol)) assert.ok(html.includes(`href="/stocks/${company.symbol!.toLowerCase()}"`), company.name);
     console.log(`${path}: PASS`);
 }
 const missingPage = await fetch(`${base}/missing-discovery-route`, { headers: { "User-Agent": "Googlebot" } });
 const missingHtml = await missingPage.text(); assert.ok(missingHtml.includes("Page not found") && missingHtml.includes("noindex"));
+for (const [index, offer] of OFFERS.entries()) {
+    for (const level of ["simple", "normal", "pro"]) {
+        const path = `/ipos/${offer.slug}${level === "simple" ? "" : `?level=${level}`}`;
+        const response = await fetch(`${base}${path}`, { headers: { "User-Agent": "Googlebot" } }), html = await response.text();
+        assert.equal(response.status, 200, path);
+        for (const marker of ["60-Second Overview", "Research Picture", "Evidence Confidence", "What Looks Good", "Needs Attention", "Fresh Issue", "Use of Proceeds", "Who is selling?", "Who wants shares?", "Price vs Value", "Listing Scenarios", "Browse all IPO sources", "College Project · Simulated financial data", ["Upcoming", "Open", "Closed", "Listed"][index]]) assert.ok(html.includes(marker), `${path}: ${marker}`);
+        assert.ok(!html.includes("IPO research is unavailable"));
+        assert.ok(!/href="#"|Apply Now|Invest Now|Subscribe Now|Watch IPO|Thinking of Applying|Profit Probability/.test(html));
+        if (index === 0) assert.ok(html.includes("Demand observation unavailable"));
+        if (index === 3) assert.ok(html.includes("Historical pre-listing research") && html.includes("/stocks/meruvan"));
+        console.log(`${path}: PASS`);
+    }
+}
+const unknownIpo = await fetch(`${base}/ipos/unknown-offer`, { headers: { "User-Agent": "Googlebot" } });
+const unknownIpoHtml = await unknownIpo.text();
+assert.ok([200, 404].includes(unknownIpo.status)); assert.ok(unknownIpoHtml.includes("IPO not found") && unknownIpoHtml.includes("noindex"));
 for(const b of UNIVERSE.filter(b=>b.symbol)){
     const response=await fetch(`${base}/stocks/${b.symbol!.toLowerCase()}`,{headers:{"User-Agent":"Googlebot"}});
     const html=await response.text();

@@ -491,3 +491,57 @@ button[aria-pressed=true] { background:var(--brand-subtle); color:var(--brand); 
 .application-header { padding-top:max(.75rem,env(safe-area-inset-top)); }
 .home-page>.discovery-controls { max-width:780px; margin:0 auto 1.25rem; }
 @media(max-width:767px) { .home-page .discovery-heading { margin-top:1rem; } .home-search { margin-bottom:2rem; } }
+
+/* IPO research reuses shared tokens, readers and typography. */
+.ipo-heading{display:flex;justify-content:space-between;align-items:start;gap:1.5rem;margin:1.5rem 0}
+.ipo-heading>div{min-width:0}
+.ipo-terms-strip{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.25rem;padding:1.25rem;background:var(--surface);border:1px solid var(--border);border-radius:10px;margin:1rem 0}
+.ipo-terms-strip dt{font-size:.875rem;color:var(--muted)}
+.ipo-terms-strip dd{margin:0;font-weight:600;font-variant-numeric:tabular-nums}
+.ipo-introduction{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:1.5rem;align-items:start}
+.ipo-lead{font-size:1.15rem;color:var(--text)}
+.ipo-checks{margin:1rem 0}
+.ipo-checks>div{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;padding:.65rem 0;border-bottom:1px solid var(--border)}
+.ipo-checks dd{margin:0;text-align:right;font-variant-numeric:tabular-nums}
+.ipo-checks dt{color:var(--muted)}
+.ipo-findings{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2rem;padding:1.5rem 0}
+.ipo-findings>section{border-top:3px solid var(--positive);padding-top:1rem;min-width:0}
+.ipo-findings>section+section{border-color:var(--warning)}
+.ipo-section{padding:2rem 0;border-top:1px solid var(--border)}
+.ipo-subsection{padding-top:1.5rem;margin-top:1.5rem;border-top:1px solid var(--border)}
+.ipo-proceeds-split,.ipo-owner-list,.ipo-demand{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.5rem;margin:1.25rem 0}
+.ipo-proceeds-split>article{padding:1.25rem;background:var(--surface);border-left:3px solid var(--brand)}
+.ipo-proceeds-split>article+article{border-color:var(--muted)}
+.ipo-proceeds-split strong{font-size:1.35rem}
+.ipo-owner-list,.ipo-demand{grid-template-columns:repeat(3,minmax(0,1fr))}
+.ipo-owner-list>article,.ipo-demand>article{padding:1rem 0;border-bottom:1px solid var(--border);min-width:0}
+.ipo-demand strong{font-size:1.5rem}
+.ipo-scenarios article{border-top:3px solid var(--brand);padding-top:1rem}
+.ipo-scenarios article:first-child{border-color:var(--negative)}
+.ipo-scenarios article:last-child{border-color:var(--positive)}
+.ipo-research .metric-list dd .source-button{display:block;margin-top:.5rem}
+.heading-with-help{display:flex;align-items:center;gap:.4rem;margin-bottom:.75rem}
+.heading-with-help h2,.heading-with-help h3{margin:0}
+.context-help{display:inline-block;flex-shrink:0;font-weight:400}
+.help-trigger,.help-close{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;padding:0;color:var(--muted);border:0;background:transparent}
+.help-popover{position:fixed;inset:auto;margin:0;width:360px;max-width:calc(100vw - 24px);max-height:calc(100dvh - 24px);padding:0;background:var(--surface);color:var(--text);border:1px solid var(--border);border-radius:14px;box-shadow:0 12px 36px #0f172a24;overflow:auto;font-size:.9375rem;line-height:1.6}
+.help-popover::backdrop{background:transparent;pointer-events:none}
+.help-popover:popover-open{display:flex;flex-direction:column;overflow:hidden}
+.help-header{flex-shrink:0}
+.help-header{display:flex;justify-content:space-between;align-items:center;gap:.75rem;padding:1rem 1.25rem;border-bottom:1px solid var(--border)}
+.help-header h2{font-size:1.1rem;margin:0}
+.help-header .eyebrow{margin:0 0 .25rem}
+.help-body{padding:1.25rem;overflow:auto;overscroll-behavior:contain;min-height:0}
+.help-body h3{font-size:.9375rem;line-height:1.4;margin:0 0 .5rem}
+.help-body p{margin:0}
+.help-explainer,.help-limitation,.help-checks{margin-top:1rem;padding:1rem;border:1px solid var(--border);border-radius:10px;background:var(--background)}
+.help-limitation{border-left:3px solid var(--negative)}
+.help-checks ol{list-style:decimal;padding-left:1.2rem;margin-bottom:0}
+.help-sheet{inset:auto 0 0;margin:0;width:100%;max-width:none;max-height:90dvh;padding:0;border:1px solid var(--border);border-radius:20px 20px 0 0;overflow:hidden;font-size:1rem;line-height:1.6}
+.help-sheet[open]{display:flex;flex-direction:column}
+.help-sheet .help-meaning{background:#f3f7ff;padding:1rem;border:1px solid #cbdcff;border-radius:10px}
+.help-sheet footer{padding:1rem max(1rem,env(safe-area-inset-right)) max(1rem,env(safe-area-inset-bottom)) max(1rem,env(safe-area-inset-left));border-top:1px solid var(--border)}
+.help-sheet footer button{width:100%}
+body:has(.help-sheet[open]){overflow:hidden}
+@media(max-width:1023px){.ipo-introduction{grid-template-columns:1fr}.ipo-owner-list,.ipo-demand{grid-template-columns:1fr}.ipo-owner-list>article,.ipo-demand>article{padding:1rem 0}}
+@media(max-width:767px){.ipo-heading{flex-direction:column;gap:.5rem}.ipo-terms-strip,.ipo-findings,.ipo-proceeds-split{grid-template-columns:1fr}.ipo-findings{gap:1.5rem}.ipo-terms-strip{gap:.8rem}.ipo-checks>div{flex-wrap:wrap;gap:.25rem .75rem}.ipo-checks dd{text-align:left}.ipo-section{padding:1.5rem 0}.help-body{padding:1rem}}

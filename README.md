@@ -10,23 +10,37 @@ The intended application has real frontend/backend implementation, database, API
 
 Technology baseline: Next.js App Router, TypeScript, React, Tailwind CSS, and pnpm. [package.json](package.json) and [pnpm-lock.yaml](pnpm-lock.yaml) own dependency versions.
 
-## Getting started
+## Run Market AI locally
 
-Use the pnpm version declared in `package.json`. Install the locked dependencies and start the development server:
+The verified setup uses Node.js 24.19.0, pnpm 11.19.0, and a locally running PostgreSQL database. PostgreSQL must be installed and started separately; the project does not install or start it.
 
-```bash
-pnpm install --frozen-lockfile
-pnpm dev
+For the first run, open a terminal in this project folder, copy `.env.example` to `.env.local`, and set `DATABASE_URL` to your local development database. Then install the locked dependencies and initialize the database:
+
+```powershell
+pnpm.cmd install --frozen-lockfile
+pnpm.cmd db:migrate
+pnpm.cmd db:seed
 ```
 
-Open [localhost:3000](http://localhost:3000).
+For each run:
 
-Run `pnpm lint` to lint the project and `pnpm build` to create a production build. After a successful build, use `pnpm start` to start the production server.
+1. Start your local PostgreSQL service.
+2. Open this project folder.
+3. Run `START_MARKET_AI.bat`, or run `pnpm.cmd dev --port 3100` in a terminal.
+4. Open [http://localhost:3100/](http://localhost:3100/).
+
+Representative research pages:
+
+- [Tavren Stock Research](http://localhost:3100/stocks/tavren)
+- [Kavreth Fabrication IPO Research · Pro](http://localhost:3100/ipos/kavreth-fabrication-ipo?level=pro)
+
+The `.env.local` file is ignored by Git. Keep database credentials private. See the [final project handoff](docs/FINAL_PROJECT_HANDOFF.md) for implemented scope, verification results, and limitations.
 
 The canonical production verification command is `pnpm build`, using Next.js Webpack for Release 1 local and CI builds unless a later verified environment supports changing that decision. The current Windows development host denied Turbopack CSS-worker process creation (`Access is denied`, error 5); no Windows security controls were weakened. `pnpm build:turbopack` remains available as an optional, non-blocking diagnostic. This limitation is specific to the observed host, not a claim about every machine.
 
 ## Documentation
 
+- [Final college-project handoff](docs/FINAL_PROJECT_HANDOFF.md)
 - [Repository instructions](AGENTS.md)
 - [Product principles](docs/product/PRODUCT_PRINCIPLES.md)
 - [PRD and Release-1 scope](docs/product/PRD.md)
